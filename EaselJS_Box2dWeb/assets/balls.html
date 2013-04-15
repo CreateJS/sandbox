@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CreateJS export from balls</title>
+
+<script src="libs/easeljs-NEXT.min.js"></script>
+<script src="libs/tweenjs-NEXT.min.js"></script>
+<script src="libs/movieclip-NEXT.min.js"></script>
+<script src="balls.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	exportRoot = new lib.balls();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(24);
+	createjs.Ticker.addListener(stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="550" height="400" style="background-color:#ffffff"></canvas>
+</body>
+</html>
