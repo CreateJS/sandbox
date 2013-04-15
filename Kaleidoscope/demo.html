@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EaselJS Kaleidoscope Demo</title>
+	<style>
+		body {
+			background-color: #111;
+			font-family: Arial, sans-serif;
+			font-size: 12pt;
+			text-align: center;
+			color: #FFF;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="demo" width="800" height="800">
+	</canvas><br>
+	Nebula image by NASA.
+	
+
+<script src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
+<script src="Kaleidoscope.js"></script><script>
+	var imagePath = "imgs/pic.jpg";
+	var c = createjs;
+	var q, radius, stage, source, kal;
+	
+	(function init() {
+		q = new c.LoadQueue(false);
+		q.loadFile(imagePath);
+		q.addEventListener("complete", run);
+	})();
+	
+	function run(evt) {
+		stage = new c.Stage("demo");
+		var w = stage.canvas.width;
+		var h = stage.canvas.height
+		
+		// calculate the radius of the kaleidoscope:
+		radius = w/2-10;
+		
+		source = new c.Bitmap(q.getResult(imagePath));
+		// set the center point:
+		source.regX = source.image.width/2;
+		source.regY = source.image.height/2;
+		// scale to fill the radius:
+		source.scaleX = radius/source.image.width*2;
+		source.scaleY = radius/source.image.height*2;
+		
+		// create the kaleidoscope:
+		kal = stage.addChild(new Kaleidoscope(radius, source, 6, [3,5,3,1,7,1]));
+		kal.rotation = 18; // straighten it (necessary because of complex pattern)
+		// center on the stage:
+		kal.x = w/2; 
+		kal.y = h/2;
+		
+		c.Ticker.addEventListener("tick", tick);
+	}
+	
+	function tick() {
+		source.rotation -= 1;
+		stage.update();
+	}
+
+</script>
+</body>
+</html>
