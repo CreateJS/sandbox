@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Line Graph</title>
+</head>
+<body>
+	<canvas id="lineGraph" width="250" height="400">
+		Line graph using CreateJS.
+	</canvas>
+	
+<script src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
+<script>
+(function() {
+	var data = [20, 31, 57, 91, 162, 210];
+	var startValue;
+	var labels = ["nov", "dec", "jan", "feb", "mar"];
+	var max = 0;
+	var pad = 8;
+	var startY;
+	var yTicks = 4;
+	var suffix = "M";
+	var graph;
+	var origin;
+	var points = [];
+	var stage;
+	
+	initLineGraph();
+	function initLineGraph() {
+		var x,y;
+		max = Math.max.apply(Math, data);
+		var pow = 1;
+		while (Math.pow(10,++pow) < max) {};
+		pow = Math.pow(10,pow-1);
+		max = Math.ceil(max/pow)*pow;
+		
+		stage = new createjs.Stage("lineGraph");
+		var w = stage.canvas.width;
+		var h = stage.canvas.height;
+		var labelW = getLabel(max+suffix).getMeasuredWidth();
+		var labelH = getLabel("a").getMeasuredHeight();
+		var graphW = w-labelW-pad*3;
+		var graphH = h-labelH-pad*3;
+		origin = {x: labelW+pad*2, y:graphH+pad};
+		
+		var background = stage.addChild(new createjs.Container());
+		var bgShape = background.addChild(new createjs.Shape());
+		graph = stage.addChild(new createjs.Shape());
+		
+		// background & rows
+		var g = bgShape.graphics;
+		x = Math.round(labelW+pad*2)+0.5;
+		for (var i=0; i<=yTicks; i++) {
+			y = Math.round(pad+(h-labelH-pad*3)/yTicks*i)+0.5;
+			g.s("#DDD").ss(1).mt(x, y).lt(w-pad, y);
+			background.addChild(getLabel((max-max/yTicks*i>>0)+suffix, "right")).set({x:labelW+pad, y:y});
+		}
+		
+		// axis:
+		stage.addChild(new createjs.Shape()).graphics
+			.s("#000").ss(9).mt(x, pad)
+			.lt(x, y)
+			.lt(w-pad, y);
+			
+		// bottom labels & points
+		y = h-pad-labelH/2;
+		g.s("#DDD").ss(1);
+		for (var i=0, l=data.length; i<l; i++) {
+			x = Math.round(labelW+pad*2+graphW/l*(i+0.5))+0.5;
+			background.addChild(getLabel(labels[i])).set({x:x, y:y});
+			g.mt(x,pad).lt(x,pad+graphH);
+			points[i] = {x:x-origin.x, y:-data[i]/max*graphH};
+		}
+		x = w-pad-0.5;
+		g.mt(x,pad).lt(x,pad+graphH);
+		if (startValue) { startY = -startValue/max*graphH; }
+		
+		
+		
+		startTween();
+		var _this = this;
+		stage.addEventListener("stagemousedown", function() { startTween(); });
+		
+		stage.update();
+		
+	}
+	
+	function startTween() {
+		graph.ratio = 0;
+		createjs.Tween.get(graph, {override:true}).to({ratio:1},4000,createjs.Ease.get(1)).addEventListener("change", function(evt) {
+			drawGraph(evt.target.target.ratio);
+			stage.update();
+		});
+	}
+	
+	function drawGraph(ratio) {
+		var g = graph.graphics.clear().f().s("#F00").ss(11, "round", "round");
+		if (startY != null) { g.mt(origin.x, origin.y+startY); }
+		else { g.mt(origin.x+points[0].x, origin.y+r*points[0].y); }
+		for (var i=0, l=data.length; i<l; i++) {
+			var r = Math.min(1, ratio*(l-i));
+			g.lt(origin.x+points[i].x, origin.y+r*points[i].y);
+		}
+		for (var i=0, l=data.length; i<l; i++) {
+			var r = Math.min(1, ratio*(l-i));
+			g.ss(5).f("#fff").drawCircle(origin.x+points[i].x, origin.y+r*points[i].y, 6);
+		}
+	}
+	
+	function getLabel(str, align, valign) {
+		var txt = new createjs.Text(str, "Arial 14px bold", "#000");
+		txt.textBaseline = valign || "middle";
+		txt.textAlign = align || "center";
+		return txt;
+	}
+	
+})();
+</script>
+</body>
+</html>
