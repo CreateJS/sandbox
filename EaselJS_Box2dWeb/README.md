@@ -1,7 +1,11 @@
 EaselJS & Box2dWeb
 =======
 
-Simple demo showing how to integrate the Box2dWeb physics engine with EaselJS graphics & SoundJS audio. Click a creature to make them explode. Append a "debug" param to the query string to see the Box2d debug draw. Like so:
+Simple demo showing how to integrate the Box2dWeb physics engine with EaselJS graphics & SoundJS audio.
+
+![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/EaselJS_Box2dWeb/README_1.jpg)
+
+Click a creature to make them explode. Append a "debug" param to the query string to see the Box2d debug draw. Like so:
 index.html?debug
 
 It also demonstrates using SpriteSheetBuilder to generate run-time spritesheets from vector art produced in Flash Pro.
