@@ -38,6 +38,13 @@
 		fulcrum.graphics.beginFill("#00F").beginStroke("#000")
 			.setStrokeStyle(3).drawPolyStar(0,30,30,3,0,-90);
 			
+		if (c.Touch.isSupported()) {
+			// if we're using touch, then we can add a larger hit area to the fulcrum
+			// to make it easier to hit.
+			fulcrum.hitArea = new c.Shape();
+			fulcrum.hitArea.graphics.beginFill("#000").drawRect(-40,0,80,60);
+		}
+			
 		// set up the fulcrum for interaction:
 		fulcrum.cursor = "pointer";
 		fulcrum.addEventListener("mousedown", handleFulcrumDown);

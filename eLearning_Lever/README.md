@@ -8,7 +8,8 @@ This is to demonstrate how to approach similar scenarios, not to showcase the in
 ![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/eLearning_Lever/README_1.jpg)
 
 Highlights:
-- touch / mobile friendly (though page is not responsive)
+- less than 2kb over-the-wire size (gzipped, excluding CDN libraries)
+- touch / mobile friendly interactive
 - image fallback for older browsers
 - render only occurs during interaction, saving CPU and battery
 - uses hand cursor to indicate interactive elements
