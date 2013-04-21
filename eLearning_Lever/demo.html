@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Unit 3: Levers</title>
+	<style>
+		body {
+			font-family: arial, sans-serif;
+			font-size: 14px;
+			background-color:#EEE;
+			text-align: justify;
+		}
+		article {
+			width: 50em;
+			background-color:#FFF;
+			margin: 3em;
+			padding: 5em;
+		}
+		section {
+			padding-top: 0.5em;
+			border-bottom: dotted 1px #DDD;
+			padding-bottom: 0.5em;
+		}
+		h1 {
+			font-size: 2.2em;
+		}
+		figure {
+			float: right;
+			margin: 1em;
+			margin-right: 0;
+			margin-top:0;
+			width: 350px;
+		}
+		figcaption {
+			font-size: 0.8em;
+			font-style: italic;
+			text-align: center;
+			color: #666;
+		}
+		footer {
+			margin-top: 5em;
+			font-size: 0.8em;
+			color: #333;
+		}
+	</style>
+</head>
+<body>
+	<article>
+	
+	<section>
+	<h1>Lever</h1>
+	<p>A lever is a machine consisting of a beam or rigid rod pivoted at a fixed hinge, or fulcrum. It is one of the six simple machines identified by Renaissance scientists. The word comes from the French lever, "to raise", cf. a levant. A lever amplifies an input force to provide a greater output force, which is said to provide leverage. The ratio of the output force to the input force is the ideal mechanical advantage of the lever.</p>
+	</section>
+	
+	<section>
+	<h2>Early use</h2>
+	<p>The earliest remaining writings regarding levers date from the 3rd century BC and were provided by Archimedes. "Give me a place to stand, and I shall move the Earth with it" is a remark of Archimedes who formally stated the correct mathematical principle of levers (quoted by Pappus of Alexandria).</p>
+	<p>It is assumed that in ancient Egypt, constructors used the lever to move and uplift obelisks weighting more than 100 tons.</p>
+	</section>
+	
+	<section>
+	<h2>Force and levers</h2>
+	<figure>
+		<canvas id="interactive" width="350" height="200">
+			<!-- if canvas is not supported, this will display instead -->
+			<image src="alternateImage.png"/>
+		</canvas>
+		<figcaption>
+			Interactive illustration of a class 1 lever showing the beam (white), fulcrum (blue), a mass (green), and the input / effort (red) required to lift the mass. <strong>Click and drag the fulcrum.</strong>
+		</figcaption>
+	</figure>
+	<p>A lever is a beam connected to ground by a hinge, or pivot, called a fulcrum. The ideal lever does not dissipate or store energy, which means there is no friction in the hinge or bending in the beam. In this case, the power into the lever equals the power out, and the ratio of output to input force is given by the ratio of the distances from the fulcrum to the points of application of these forces. This is known as the law of the lever.</p>
+	<p>The mechanical advantage of a lever can be determined by considering the balance of moments or torque, T, about the fulcrum, where M1 is the input force to the lever and M2 is the output force. The distances a and b are the perpendicular distances between the forces and the fulcrum.</p>
+	<p>The mechanical advantage of the lever is the ratio of output force to input force.</p>
+	<p>This relationship shows that the mechanical advantage can be computed from ratio of the distances from the fulcrum to where the input and output forces are applied to the lever.</p>
+	</section>
+	
+	<section>
+	<h2>Classes of levers</h2>	
+	<p>Levers are classified by the relative positions of the fulcrum and the input and output forces. It is common to call the input force the effort and the output force the load or the resistance. This allows the identification of three classes of levers by the relative locations of the fulcrum, the resistance and the effort:</p>
+	<ul>
+	<li><strong>Class 1</strong>: Fulcrum in the middle: the effort is applied on one side of the fulcrum and the resistance on the other side, for example, a crowbar or a pair of scissors.</li>
+	<li><strong>Class 2</strong>: Resistance in the middle: the effort is applied on one side of the resistance and the fulcrum is located on the other side, for example, a wheelbarrow, a nutcracker, a bottle opener or the brake pedal of a car. Mechanical advantage is greater than 1.</li>
+	<li><strong>Class 3</strong>: Effort in the middle: the resistance is on one side of the effort and the fulcrum is located on the other side, for example, a pair of tweezers or the human mandible. Mechanical advantage is less than 1.</li>
+	</ul>
+	<p>These cases are described by the mnemonic "fre 123" where the fulcrum is in the middle for the 1st class lever, the resistance is in the middle for the 2nd class lever, and the effort is in the middle for the 3rd class lever.</p>
+	</section>
+	
+	<footer>
+	All text content is derived from <a href="http://en.wikipedia.org/wiki/Lever">Wikipedia</a> and is subject to the Creative Commons Attribution-ShareAlike 3.0 Unported License.
+	</footer>
+	
+	</article>
+	
+<script src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
+<script src="interactive.js"></script>
+</body>
+</html>
