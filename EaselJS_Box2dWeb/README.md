@@ -4,6 +4,7 @@ EaselJS & Box2dWeb
 Simple demo showing how to integrate the Box2dWeb physics engine with EaselJS graphics & SoundJS audio.
 
 ![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/EaselJS_Box2dWeb/README_1.jpg)
+
 **[View this example online.](http://sandbox.createjs.com/EaselJS_Box2dWeb/)**
 
 Click a creature to make them explode. Append a "debug" param to the query string to see the Box2d debug draw. Like so:
