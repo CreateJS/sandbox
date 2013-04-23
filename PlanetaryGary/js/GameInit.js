@@ -55,7 +55,7 @@ var urlParams = {};
 	}
 	
 	function handleProgress(evt) {
-		drawProgress(evt.percent);
+		drawProgress(evt.loaded/evt.total);
 		stage.update();
 	}
 	
