@@ -4,6 +4,7 @@ Toolkit for CreateJS Banner Ad
 Interactive HTML5 banner ad created entirely in Adobe Flash Pro with Toolkit for CreateJS v1.2.
 
 ![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/ToolkitBannerAd/README_1.jpg)
+**[View this example online.](http://sandbox.createjs.com/ToolkitBannerAd/garyad.html)**
 
 The total "over the wire" (gzipped) size for this banner ad, excluding the CDN hosted CreateJS libraries, is less than 70kb. It was created entirely by a designer/illustrator, including the timeline code for interaction.
 
