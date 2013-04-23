@@ -3,6 +3,7 @@ Planetary Gary
 
 Full featured CreateJS game example.
 ![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/PlanetaryGary/README_1.jpg)
+[View this example online.](http://sandbox.createjs.com/PlanetaryGary/)
 
 Important notes:
 - due to security restrictions on local content, you must run this example from a web server.
