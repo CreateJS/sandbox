@@ -1,7 +1,8 @@
 EaseJS Bitmap Font
 =======
 
-Use an SpriteSheet as a source for a bitmap font. It is recommended to use Flash Pro and Zoë (http://createjs.com/zoe) with named frame labels for each character.
+Use an SpriteSheet as a source for a bitmap font. It is recommended to use Flash Pro and Zoë (http://createjs.com/zoe)
+with named frame labels for each character.
 
 Adapted from an idea provided by David Deraedt (http://www.dehats.com/drupal/node/116)
 
@@ -15,4 +16,4 @@ Important notes:
 
 All code is copyright 2013 gskinner.com, inc. and is free to use, copy, and modify under the MIT license.
 
-Check out the CreateJS blog for updates (blog.createjs.com).
+Check out the (CreateJS Blog)[http://blog.createjs.com] for updates.
