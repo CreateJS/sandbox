@@ -15,5 +15,6 @@ Important notes:
 - Requires EaselJS 0.6
 
 All code is copyright 2013 gskinner.com, inc. and is free to use, copy, and modify under the MIT license.
+All art & graphics are copyright 2013 gskinner.com, inc. and cannot be used without permission.
 
 Check out the [CreateJS Blog](http://blog.createjs.com) for updates.
