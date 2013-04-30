@@ -6,8 +6,6 @@
 	<script src="http://code.createjs.com/preloadjs-0.3.0.min.js"></script>
 	<script src="easeljs/display/BitmapText.js"></script>
 	<script>
-		window.addEventListener("load", init, false);
-
 		var stage;
 		function init() {
 			stage = new createjs.Stage(document.getElementById("canvas"));
@@ -30,7 +28,7 @@
 		}
 	</script>
 </head>
-<body>
+<body onload="init()">
 	<canvas width="800" height="600" id="canvas"></canvas>
 </body>
 </html>
