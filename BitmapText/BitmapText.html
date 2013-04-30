@@ -4,7 +4,7 @@
 	<title>Bitmap Text</title>
 	<script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
 	<script src="http://code.createjs.com/preloadjs-0.3.0.min.js"></script>
-	<script src="BitmapText.js"></script>
+	<script src="easeljs/display/BitmapText.js"></script>
 	<script>
 		window.addEventListener("load", init, false);
 
@@ -14,18 +14,17 @@
 
 			var preload = new createjs.LoadQueue();
 			preload.addEventListener("complete", handleComplete);
-			preload.loadManifest(
-				[
-					{id:"data", src:"alphabet.json"},
-					{id:"image", src:"alphabet.png"}
-				]
-			);
+			preload.loadManifest([
+                {id:"data", src:"Font.json"},
+                {id:"image", src:"Font.png"}
+			]);
 		}
+
 		function handleComplete(event) {
 			var data = event.target.getResult("data");
 			var ss = new createjs.SpriteSheet(data);
 
-			var text = new createjs.BitmapText("Hello World\nWhat's Happening?", ss);
+			var text = new createjs.BitmapText("Hello World,\nWhat's Happening?", ss);
 			stage.addChild(text);
 			stage.update();
 		}
