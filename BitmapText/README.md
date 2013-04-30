@@ -2,7 +2,7 @@ EaselJS BitmapText
 =======
 
 Use an SpriteSheet as a source for a bitmap font.
-Adapted from an idea provided by David Deraedt (http://www.dehats.com/drupal/node/116)
+Adapted from an idea provided by David Deraedt [BitmapText Class](http://www.dehats.com/drupal/node/116).
 
 ![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/BitmapText/README_1.png)
 
