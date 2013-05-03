@@ -8,7 +8,9 @@ Get started creating rich interactive experiences and games in HTML5 using Creat
 *  SoundJS (cross-browser/device audio)
 *  PreloadJS (preload and asset management). 
 
-The code sample found within is to be accompanied by [Getting started with CreateJS](https://www.youtube.com/watch?v=OWHJa0jKJgo) video.  
+The code sample found within is to be accompanied by [Getting started with CreateJS](https://www.youtube.com/watch?v=OWHJa0jKJgo) video.      
+
+![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/GettingStartedWithCreateJS/GettingStartedWithCreateJS.png)   
 
 For more information
 ---------------------
