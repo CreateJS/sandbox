@@ -1,4 +1,4 @@
-Kaleidoscope
+E-Learning Example
 =======
 
 Shows an example of embedding a CreateJS-based interactive learning piece into a larger document.
