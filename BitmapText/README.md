@@ -1,15 +1,16 @@
 EaselJS BitmapText
 =======
 
-Use an SpriteSheet as a source for a bitmap font.
+Displays text using bitmap glyphs defined in a sprite sheet.
 Adapted from an idea provided by David Deraedt [BitmapText Class](http://www.dehats.com/drupal/node/116).
 
 ![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/BitmapText/README_1.png)
 
 Important notes:
 
-* Characters are referenced using named animations in the SpriteSheet format.
-* Support for any character that has a matching definition.
+* The included demo must be run from a server to load correctly.
+* The example font has not been adjusted for correct kerning / letter placement.
+* Characters are referenced using named animations in the sprite sheet.
 * Additional support for line break (\n) and space "characters"
 * Characters will default to lowercase/uppercase variants
 * No support for wrapping

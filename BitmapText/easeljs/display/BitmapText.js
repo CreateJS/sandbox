@@ -30,111 +30,199 @@ this.createjs = this.createjs || {};
 
 (function () {
 
-	/**
-	 * Uses a SpriteSheet defining characters in an image to display text strings.
-	 *
-	 * <h4>Example</h4>
-	 *      var spriteSheet = new createjs.SpriteSheet(jsonData);
-	 *      var text = new createjs.BitmapText("Hello World\nWhat's Happening?", spriteSheet);
-	 *      stage.addChild(text);
-	 *
-	 * Notes:
-	 * - Characters are referenced using named animations in the SpriteSheet format.
-	 * - Support for any character that has a matching definition.
-	 * - Additional support for line break (\n) and space "characters"
-	 * - Characters will default to lowercase/uppercase variants
-	 * - No support for wrapping
-	 * - Requires EaselJS 0.6
-	 *
-	 * @class BitmapText
-	 * @param text
-	 * @param spriteSheet
-	 * @constructor
-	 */
-	function BitmapText(text, spriteSheet) {
-		this.initialize(text, spriteSheet);
-	}
+/**
+ * Displays text using bitmap glyphs defined in a sprite sheet. Multiline text is supported
+ * using new line characters, but automatic wrapping is not supported. See the spriteSheet
+ * property for more information on defining glyphs.
+ * @class BitmapText
+ * @extends DisplayObject
+ * @param {String} [text=""] The text to display.
+ * @param {SpriteSheet} [spriteSheet=null] The spritesheet that defines the character glyphs.
+ * @constructor
+ **/
+function BitmapText(text, spriteSheet) {
+	this.initialize(text, spriteSheet);
+}
+var p = BitmapText.prototype = new createjs.DisplayObject();
 
-	var p = BitmapText.prototype = new createjs.Container();
+// static properties:
 
+// events:
+
+// public properties:
 	/**
 	 * The text to display.
-	 * @type {String}
-	 */
+	 * @property text
+	 * @type String
+	 * @default ""
+	 **/
 	p.text = "";
+	
+	/**
+	 * A SpriteSheet instance that defines the glyphs for this bitmap text. Each glyph/character
+	 * should have a single frame animation defined in the sprite sheet named the same as
+	 * corresponding character. For example, the following animation definition:
+	 *
+	 * <code>"A": {frames: [0]}</code>
+	 *
+	 * would indicate that the frame at index 0 of the spritesheet should be drawn for the "A" character.
+	 *
+	 * Note that if a character in the text is not found in the sprite sheet, it will also
+	 * try to use the alternate case (upper or lower).
+	 *
+	 * See SpriteSheet for more information on defining sprite sheet data.
+	 * @property text
+	 * @type String
+	 * @default null
+	 **/
 	p.spriteSheet = null;
 
-	p.lineHeight = 50;
-	p.letterSpacing = 5;
-	p.emSpace = 40;
+	/**
+	 * The height of each line of text. If 0, then it will use a line height calculated
+	 * by checking for the height of the "1", "T", or "L" character (in that order). If
+	 * those characters are not defined, it will use the height of the first frame of the
+	 * sprite sheet.
+	 * @property lineHeight
+	 * @type Number
+	 * @default 0
+	 **/
+	p.lineHeight = 0;
 
-	p.Container_initialize = p.initialize;
+	/**
+	 * This spacing (in pixels) will be added after each character in the output.
+	 * @property letterSpacing
+	 * @type Number
+	 * @default 0
+	 **/
+	p.letterSpacing = 0;
 
+	/**
+	 * If a space character is not defined in the sprite sheet, then empty pixels equal to
+	 * spaceWidth will be inserted instead. If  0, then it will use a value calculated
+	 * by checking for the width of the "1", "E", or "A" character (in that order). If
+	 * those characters are not defined, it will use the width of the first frame of the
+	 * sprite sheet.
+	 * @property spaceWidth
+	 * @type Number
+	 * @default 0
+	 **/
+	p.spaceWidth = 0;
+	
+// private properties:
+	
+// constructor:
+	/**
+	 * @property DisplayObject_initialize
+	 * @type Function
+	 * @private
+	 **/
+	p.DisplayObject_initialize = p.initialize;
+	
+	/**
+	 * Initialization method.
+	 * @method initialize
+	 * @protected
+	 **/
 	p.initialize = function (text, spriteSheet) {
-		this.Container_initialize();
+		this.DisplayObject_initialize();
 
 		this.text = text;
 		this.spriteSheet = spriteSheet;
-		//TODO: Determine em-space using "m", or first character.
-		//TODO: Determine line height using em-space.
-		this._updateText()
 	}
-
-	p.setText = function (text) {
-		this.text = text;
-		this._updateText();
-	}
-
-	//TODO: Consider auto-caching
-	//TODO: Consider using an actual draw instead of a Container, and caching individual letters.
-	p._updateText = function () {
-		this.children = [];
-		var xPos = 0;
-		var yPos = 0;
-		for(var i = 0, l = this.text.length; i < l; i++) {
-			var bmp = new createjs.BitmapAnimation(this.spriteSheet);
+	
+// public methods:
+	/**
+	 * @property DisplayObject_draw
+	 * @type Function
+	 * @private
+	 **/
+	p.DisplayObject_draw = p.draw;
+	
+	/**
+	 * Draws the display object into the specified context ignoring it's visible, alpha, shadow, and transform.
+	 * Returns true if the draw was handled (useful for overriding functionality).
+	 * NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
+	 * @method draw
+	 * @param {CanvasRenderingContext2D} ctx The canvas 2D context object to draw into.
+	 * @param {Boolean} ignoreCache Indicates whether the draw operation should ignore any current cache.
+	 * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
+	 * into itself).
+	 **/
+	p.draw = function(ctx, ignoreCache) {
+		if (this.DisplayObject_draw(ctx, ignoreCache)) { return true; }
+		
+		var w, h, x=0, y=0, spaceW=this.spaceWidth, lineH=this.lineHeight, ss=this.spriteSheet;
+		
+		var hasSpace = !!this._getFrame(" ", ss);
+		if (!hasSpace && spaceW==0) { spaceW = this._getSpaceWidth(ss); }
+		if (lineH==0) { lineH = this._getLineHeight(ss); }
+		
+		for(var i=0, l=this.text.length; i<l; i++) {
 			var char = this.text.charAt(i);
-			if (char == " ") {
-				xPos += this.emSpace;
+			if (!hasSpace && char == " ") {
+				x += spaceW;
 				continue;
-			}
-			if (this.isLineBreak(char)) {
-				xPos = 0;
-				yPos += this.lineHeight;
+			} else if (char=="\n" || char=="\r") {
+				if (char=="\r" && this.text.charAt(i+1) == "\n") { i++; } // crlf
+				x = 0;
+				y += lineH;
 				continue;
 			}
 
-			var anim = this._getCharacter(char);
-			if (!anim) {
-				continue;
-			}
-			bmp.gotoAndStop(anim.name);
-
-			bmp.x = xPos;
-			bmp.y = yPos;
-			this.addChild(bmp);
-
-			var frame = anim.frames[0];
-			var w = this.spriteSheet.getFrame(frame).rect.width;
-			xPos += w + this.letterSpacing;
+			var o = this._getFrame(char, ss);
+			if (!o) { continue; }
+			var rect = o.rect;
+			
+			ctx.drawImage(o.image, rect.x, rect.y, w=rect.width, h=rect.height, x-o.regX, y-o.regY, w, h);
+			
+			x += rect.width + this.letterSpacing;
 		}
 	}
-
-	p.isLineBreak = function (char) {
-		return (char == "\n" || char == "\r" || char == "\n\r");
+	
+	/**
+	 * Returns true or false indicating whether the display object would be visible if drawn to a canvas.
+	 * This does not account for whether it would be visible within the boundaries of the stage.
+	 * NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
+	 * @method isVisible
+	 * @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas
+	 **/
+	p.isVisible = function() {
+		var hasContent = this.cacheCanvas || (this.spriteSheet && this.spriteSheet.complete && this.text);
+		return !!(this.visible && this.alpha > 0 && this.scaleX != 0 && this.scaleY != 0 && hasContent);
 	}
 
-	p._getCharacter = function (character) {
-		var frame = this.spriteSheet.getAnimation(character);
-		if (!frame) {
-			frame = this.spriteSheet.getAnimation(character.toLowerCase());
-		}
-		if (!frame) {
-			frame = this.spriteSheet.getAnimation(character.toUpperCase());
-		}
-		return frame;
+// private methods:
+	/**
+	 * @method _getFrame
+	 * @type Function
+	 * @private
+	 **/
+	p._getFrame = function(char, spriteSheet) {
+		var o = spriteSheet.getAnimation(char) ||
+				spriteSheet.getAnimation(char.toUpperCase()) ||
+				spriteSheet.getAnimation(char.toLowerCase());
+		return o ? spriteSheet.getFrame(o.frames[0]) : null;
+	}
+	
+	/**
+	 * @method _getLineHeight
+	 * @type Function
+	 * @private
+	 **/
+	p._getLineHeight = function(ss) {
+		var frame = this._getFrame("1",ss) || this._getFrame("T",ss) || this._getFrame("L",ss) || ss.getFrame(0);
+		return frame ? frame.rect.height : 1;
+	}
+	
+	/**
+	 * @method _getSpaceWidth
+	 * @type Function
+	 * @private
+	 **/
+	p._getSpaceWidth = function(ss) {
+		var frame = this._getFrame("1",ss) || this._getFrame("E",ss) || this._getFrame("A",ss) || ss.getFrame(0);
+		return frame ? frame.rect.width : 1;
 	}
 
 	createjs.BitmapText = BitmapText;
-
 }())
