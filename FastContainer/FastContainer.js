@@ -114,7 +114,7 @@ var p = FastContainer.prototype = new createjs.Container();
 				if (rect = child.sourceRect) {
 					ctx.drawImage(img, rect.x, rect.y, w=rect.width, h=rect.height, child.x-child.regX*(sx=child.scaleX), child.y-child.regY*(sy=child.scaleY), w*sx, h*sy);
 				} else {
-					ctx.drawImage(img, 0, 0, w=img.width, h=img.height, child.x-child.regX*(sx=child.scaleX), child.y-child.regY*(sy=child.scaleY), w*sx, h*sy);
+					ctx.drawImage(img, child.x-child.regX*(sx=child.scaleX), child.y-child.regY*(sy=child.scaleY), img.width*sx, img.height*sy);
 				}
 			} // else not a supported type.
 		}
