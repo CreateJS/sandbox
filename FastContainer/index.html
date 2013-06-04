@@ -58,10 +58,12 @@
 	}
 
 	function tick(event) {
+		
+		var t = (new Date()).getTime();
+		if (createjs.Ticker.getMeasuredFPS(30) > 30) { boost(); }
+	
 		var h = canvas.height;
 		var w = canvas.width;
-		
-		addSparkles(35, canvas.width/2, canvas.height/2, 1, 0);
 		
 		var l = container.getNumChildren();
 		// loop through all of the active sparkles on stage:
@@ -74,47 +76,55 @@
 			
 			// remove sparkles that are no longer visible:
 			if (sparkle.alpha <= 0 || sparkle.y>h+50 || sparkle.x>w+50 || sparkle.y<-50 || sparkle.x<-50) {
-				container.removeChildAt(i);
+				resetSparkle(sparkle);
 			}
 			
 		}
+		
 
 		// draw the updates to stage
-		var t = (new Date()).getTime();
 		stage.update(event);
 		ts.push((new Date()).getTime()-t);
 		while (ts.length > 100) { ts.shift(); }
 		t = 0;
 		for (var i=0,ll=ts.length; i<ll; i++) { t+=ts[i]; }
 		t = t/ll+0.5|0;
-		document.getElementById("fps").innerHTML = (createjs.Ticker.getMeasuredFPS()|0)+"fps <b>Render time: </b>"+t+"ms <b>Particles: </b>"+l;
+		
+		document.getElementById("fps").innerHTML = (createjs.Ticker.getMeasuredFPS()+0.5|0)+"fps <b>Render time: </b>"+t+"ms <b>Particles: </b>"+l;
+	}
+	
+	function boost() {
+		addSparkles(5);
 	}
 
-	function addSparkles(count, x, y, speed, velX) {
+	function addSparkles(count) {
 		//create the specified number of sparkles
 		for (var i=0; i<count; i++) {
 			// clone the original sparkle, so we don't need to set shared properties:
 			var sparkle = bmpAnim.clone();
-
-			// set display properties:
-			sparkle.x = x;
-			sparkle.y = y;
-			sparkle.alpha = 1;
-			sparkle.scaleX = sparkle.scaleY = Math.random()+0.3;
-			
-			// set up velocities:
-			var a = Math.PI*2*Math.random();
-			var v = (Math.random()-0.5)*30*speed;
-			sparkle.vX = Math.cos(a)*v+velX;
-			sparkle.vY = Math.sin(a)*v;
-			sparkle.vA = -0.01; // alpha
-
-			// start the animation on a random frame:
-			sparkle.gotoAndPlay(Math.random()*sparkle.spriteSheet.getNumFrames()|0);
+			resetSparkle(sparkle);
 
 			// add to the display list:
 			container.addChild(sparkle);
 		}
+	}
+	
+	function resetSparkle(sparkle) {
+		// set display properties:
+		sparkle.x = canvas.width/2;
+		sparkle.y = canvas.height/2;
+		sparkle.alpha = 1;
+		sparkle.scaleX = sparkle.scaleY = Math.random()+0.3;
+		
+		// set up velocities:
+		var a = Math.PI*2*Math.random();
+		var v = (Math.random()-0.5)*30;
+		sparkle.vX = Math.cos(a)*v;
+		sparkle.vY = Math.sin(a)*v;
+		sparkle.vA = -0.01; // alpha
+
+		// start the animation on a random frame:
+		sparkle.gotoAndPlay(Math.random()*sparkle.spriteSheet.getNumFrames()|0);
 	}
 
 	</script>
