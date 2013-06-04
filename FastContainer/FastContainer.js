@@ -40,6 +40,9 @@ this.createjs = this.createjs||{};
  * For best results, use only a single image source with FastContainer. That is, if using Bitmap instances, they should
  * all share the same image property. If using BitmapAnimation instances, they should share the same SpriteSheet.
  * 
+ * The performance gains provided by FastContainer vary widely by browser and device. Testing has shown performance
+ * gains between 0-50%.
+ *
  * By default, this display object has mouseEnabled set to false in order to reduce the cost of mouse interactions.
  * @class FastContainer
  * @extends Container
@@ -63,14 +66,6 @@ var p = FastContainer.prototype = new createjs.Container();
 	 * @default true
 	 **/
 	p.enableAlpha = true;
-	
-	/**
-	 * TODO: DESC
-	 * @property enableRotation
-	 * @type Boolean
-	 * @default false
-	 **/
-	p.enableRotation = false;
 
 // private properties:
 
@@ -116,32 +111,16 @@ var p = FastContainer.prototype = new createjs.Container();
 			if (!child.isVisible()) { continue; }
 			
 			if (enableAlpha) { ctx.globalAlpha = a*child.alpha; }
-			if (enableRotation && (rotation = child.rotation)%360 != 0) {
-				ctx.translate(-x+(x=child.x), -y+(y=child.y));
-				ctx.rotate(rotation);
-				if (ss=child.spriteSheet) {
-					if (!(o=ss.getFrame(child.currentFrame))) { continue; }
-					ctx.drawImage(o.image, (rect = o.rect).x, rect.y, w=rect.width, h=rect.height, child.x-(o.regX+child.regX)*(sx=child.scaleX), child.y-(o.regY+child.regY)*(sy=child.scaleY), w*sx, h*sy);
-				} else if (img=child.image) {
-					if (rect = child.sourceRect) {
-						ctx.drawImage(img, rect.x, rect.y, w=rect.width, h=rect.height, child.x-child.regX*(sx=child.scaleX), child.y-child.regY*(sy=child.scaleY), w*sx, h*sy);
-					} else {
-						ctx.drawImage(img, -child.regX*(sx=child.scaleX), -child.regY*(sy=child.scaleY), img.width*sx, img.height*sy);
-					}
-				} // else not a supported type.
-				ctx.rotate(-rotation);
-			} else {
-				if (ss=child.spriteSheet) {
-					if (!(o=ss.getFrame(child.currentFrame))) { continue; }
-					ctx.drawImage(o.image, (rect = o.rect).x, rect.y, w=rect.width, h=rect.height, -x+child.x-(o.regX+child.regX)*(sx=child.scaleX), -y+child.y-(o.regY+child.regY)*(sy=child.scaleY), w*sx, h*sy);
-				} else if (img=child.image) {
-					if (rect = child.sourceRect) {
-						ctx.drawImage(img, rect.x, rect.y, w=rect.width, h=rect.height, -x+child.x-child.regX*(sx=child.scaleX), -y+child.y-child.regY*(sy=child.scaleY), w*sx, h*sy);
-					} else {
-						ctx.drawImage(img, -x+child.x-child.regX*(sx=child.scaleX), -y+child.y-child.regY*(sy=child.scaleY), img.width*sx, img.height*sy);
-					}
-				} // else not a supported type.
-			}
+			if (ss=child.spriteSheet) {
+				if (!(o=ss.getFrame(child.currentFrame))) { continue; }
+				ctx.drawImage(o.image, (rect = o.rect).x, rect.y, w=rect.width, h=rect.height, -x+child.x-(o.regX+child.regX)*(sx=child.scaleX), -y+child.y-(o.regY+child.regY)*(sy=child.scaleY), w*sx, h*sy);
+			} else if (img=child.image) {
+				if (rect = child.sourceRect) {
+					ctx.drawImage(img, rect.x, rect.y, w=rect.width, h=rect.height, -x+child.x-child.regX*(sx=child.scaleX), -y+child.y-child.regY*(sy=child.scaleY), w*sx, h*sy);
+				} else {
+					ctx.drawImage(img, -x+child.x-child.regX*(sx=child.scaleX), -y+child.y-child.regY*(sy=child.scaleY), img.width*sx, img.height*sy);
+				}
+			} // else not a supported type.
 		}
 		return true;
 	};
