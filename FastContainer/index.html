@@ -13,7 +13,7 @@
 	  http://code.createjs.com -->
 
 	<script>
-	var canvas, stage, container, ts;
+	var canvas, stage, container, ts, rotate;
 
 	var imgSeq = new Image();		// The image for the sparkle animation
 	var bmpAnim;					// The animated sparkle template to clone
@@ -23,6 +23,8 @@
 			document.getElementById("header").style.display = "none";
 		}
 		document.getElementById("select").style.visibility = "hidden";
+		rotate = document.getElementById("rotate").checked;
+		console.log(rotate);
 
 		// create a new stage and point it at our canvas:
 		canvas = document.getElementById("testCanvas");
@@ -31,12 +33,13 @@
 		stage.addChild(container);
 		container.alpha = 0.99; // strangely, Safari renders images ~2x faster if alpha <1.
 		container.enableAlpha = true;
+		container.enableRotation = rotate;
 		
 		ts = [];
 		
 		// load the sprite sheet image, and wait for it to complete before proceeding:
 		imgSeq.onload = handleImageLoad;
-		imgSeq.src = "assets/sparkle_21x23.png";
+		imgSeq.src = "assets/daisy.png";//sparkle_21x23.png";
 	}
 
 	function handleImageLoad() {
@@ -50,7 +53,8 @@
 		}
 
 		// set up an animation instance, which we will clone
-		bmpAnim = new createjs.BitmapAnimation(new createjs.SpriteSheet(data));
+		//bmpAnim = new createjs.BitmapAnimation(new createjs.SpriteSheet(data));
+		bmpAnim = new createjs.Bitmap(imgSeq);
 
 		// start the tick and point it at the window so we can do some work before updating the stage:
 		createjs.Ticker.addEventListener("tick", tick);
@@ -115,6 +119,9 @@
 		sparkle.y = canvas.height/2;
 		sparkle.alpha = 1;
 		sparkle.scaleX = sparkle.scaleY = Math.random()+0.3;
+		sparkle.regX = sparkle.image.width/2;
+		sparkle.regY = sparkle.image.height/2;
+		if (rotate && Math.random() < 0.2) { sparkle.rotation = Math.random()*360; }
 		
 		// set up velocities:
 		var a = Math.PI*2*Math.random();
@@ -124,7 +131,7 @@
 		sparkle.vA = -0.01; // alpha
 
 		// start the animation on a random frame:
-		sparkle.gotoAndPlay(Math.random()*sparkle.spriteSheet.getNumFrames()|0);
+		//sparkle.gotoAndPlay(Math.random()*sparkle.spriteSheet.getNumFrames()|0);
 	}
 
 	</script>
@@ -142,6 +149,7 @@
 				<option label="FastContainer">FastContainer</option>
 				<option label="Container">Container</option>
 			</select>
+			<input type="checkbox" id="rotate" value="rotate">rotate
 			<input type="button" value="run" onclick="init()">
 	    </p>
 	    <div id="fps">--</div>
