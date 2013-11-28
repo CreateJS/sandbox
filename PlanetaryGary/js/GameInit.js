@@ -32,18 +32,26 @@ var urlParams = {};
 		// set up the load queue, and listen for its events:
 		queue = new c.LoadQueue(true);
 		queue.installPlugin(c.Sound);
-		queue.on("progress", handleProgress, this);
-		queue.on("fileload", handleFileLoad, this);
-		queue.on("complete", handleComplete, this);
+		queue.addEventListener("progress", handleProgress.bind(this));
+		queue.addEventListener("fileload", handleFileLoad.bind(this));
+		queue.addEventListener("complete", handleComplete.bind(this));
 		
 		// load our assets, starting with everything we need to render the spritesheet:
 		queue.loadManifest([
-			{src:"libs/tweenjs-NEXT.min.js"},
-			{src:"libs/movieclip-NEXT.min.js"},
-			{src:"assets/PlanetaryGary_art.js", id: "art"},
-			{src:"js/Game.js"},
-			{src:"sounds.json", type:c.LoadQueue.MANIFEST}
-		]);
+				{src:"libs/tweenjs-0.4.0.min.js"},
+				{src:"libs/movieclip-0.6.0.min.js"},
+				{src:"assets/PlanetaryGary_art.js", id: "art"},
+				{src:"js/Game.js"},
+				{src:"assets/sounds/garywalk_chill.mp3", id:"music"},
+				{src:"assets/sounds/BodySlam.mp3", id:"BodySlam"},
+				{src:"assets/sounds/DirtSlide.mp3", id:"DirtSlide"},
+				{src:"assets/sounds/EnemyHit.mp3", id:"EnemyHit"},
+				{src:"assets/sounds/HitHard4.mp3", id:"HitHard4"},
+				{src:"assets/sounds/LaserGunShot.mp3", id:"LaserGunShot"},
+				{src:"assets/sounds/PressPlay.mp3", id:"PressPlay"},
+				{src:"assets/sounds/TunnelCollision.mp3", id:"TunnelCollision"},
+				{src:"assets/sounds/jump4.mp3", id:"Jump"}
+			], true);
 	}
 	
 	function handleProgress(evt) {
@@ -52,7 +60,6 @@ var urlParams = {};
 	}
 	
 	function handleFileLoad(evt) {
-		console.log(evt);
 		var o = evt.item;
 		if (o.type == c.LoadQueue.JAVASCRIPT) {
 			// add JS to the document as it loads:
