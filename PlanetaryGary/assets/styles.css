@@ -357,9 +357,9 @@ body {
   background: url(images/frame.png) no-repeat center center, url(images/planet-one.png) no-repeat left bottom, url(images/planet-two.png) no-repeat right bottom, url(images/bg-stars.png) repeat top left;
 }
 
-#gameCanvas {
-  background-color: #C7F0C1;
+canvas {
   position:absolute;
+  background: -webkit-linear-gradient(top,#C1F0C7 0%,#F0F9D1 75%,rgba(245,83,81,1) 75%);
 }
 
 #gameFrame {

@@ -4,7 +4,8 @@
 	var c = createjs;
 	
 	var Game = function(view, width, height, scale) {
-		this.view = view; // the Container instance to draw into
+		this.view = view; // the SpriteStage instance to draw into
+		this.view.mouseChildren = false; // nothing in the game view requires mouse interaction
 		this.width = width;
 		var h = this.height = height;
 		var s = this.scale = scale;
@@ -55,16 +56,19 @@
 			this.sprites = [];
 			this.terrainContainers = [];
 			
-			var bg = this.view.addChild(new c.Shape()).graphics
+			var bg = new c.Shape();
+			bg.graphics
 				.beginLinearGradientFill(["#C1F0C7", "#F0F9D1"], [0,1], 0,0, 0,this.height-170*s)
 				.drawRect(0,0,this.width,this.height-170*s)
 				.beginFill("#f55351").drawRect(0,this.height-170*s,this.width,170*s);
+			bg.cache(0,0,this.width,this.height);
+			this.view.addChild(new c.Bitmap(bg.cacheCanvas));
 			
 			var terrain = this.terrain;
 			for (i=0,l=terrain.length; i<l; i++) {
-				var container = this.view.addChild(new c.Container());
-				this.terrainContainers[i] = container;
-				terrain[i].x = s*terrain[i].x||0; // TMP?
+				var o = this.view.addChild(new c.SpriteContainer(spriteSheet));
+				this.terrainContainers[i] = o;
+				terrain[i].x = s*terrain[i].x||0;
 			}
 			
 			// wrap the "gameStats" div in a DOMElement, so we can treat it as a DisplayObject:
@@ -74,10 +78,6 @@
 		// animate in the stats window:
 		this.stats.set({alpha:0, x:200, y:40});
 		c.Tween.get(this.stats).wait(1000).to({x:40, alpha:1}, 1000, c.Ease.easeOut);
-		
-		// the game caches the view in endGame() before returning to the main menu,
-		// this undoes that:
-		this.view.uncache();
 		
 		this.spriteSheet = spriteSheet;
 		this.dead = false;
@@ -102,12 +102,14 @@
 		this.tickListener = this.view.on("tick", this.tick, this);
 	}
 	
-	p.tick = function() {
-		this.updateShot();
-		this.updateTerrain(true);
+	p.tick = function(evt) {
+		fps = this.spriteSheet.framerate;
+		var t =  evt.params[0].delta / (1000/fps);
+		this.updateShot(t);
+		this.updateTerrain(true, t);
 		if (!this.dead) {
-			this.distance += this.speed;
-			this.speed = Math.min(12, this.speed+0.005); // speed up the game
+			this.distance += this.speed*t;
+			this.speed = Math.min(12, this.speed+0.005*t); // speed up the game
 			this.updateStats();
 		}
 	}
@@ -127,14 +129,15 @@
 		}
 	}
 	
-	p.updateShot = function() {
-		if (--this.shotDelay == 0) {
+	p.updateShot = function(t) {
+		if (this.shotDelay && ((this.shotDelay -= t) <= 0)) {
 			this.shot.visible = true;
 			this.shot.gotoAndPlay("bulletIdle");
 			this.shot.x = this.hero.x + 140;
+			this.shotDelay = null;
 		} else if (!this.shot.visible) { return; }
 		
-		this.shot.x += 50*this.scale;
+		this.shot.x += t*50*this.scale;
 		if (this.shot.x > this.width-this.shot.getBounds().x) {
 			// left the screen.
 			this.shot.stop();
@@ -142,10 +145,10 @@
 		}
 	}
 	
-	p.updateTerrain = function(enemies) {
+	p.updateTerrain = function(enemies, t) {
 		var i,l;
 		// move existing terrain elements:
-		var speed = this.scale*this.speed;
+		var speed = this.scale*this.speed*(t||1);
 		for (i=this.sprites.length-1; i>=0; i--) {
 			var sprite = this.sprites[i];
 			if (sprite.type == 0) { continue; }
@@ -235,11 +238,16 @@
 		this.hero.type = null;
 		this.dead = true;
 		window.document.removeEventListener("keydown", this.keyListener);
-		var tween = c.Tween.get(this, {override:true}).to({speed:-this.speed*0.5}, 3000, c.Ease.get(-0.6)).to({speed:0},4000, c.Ease.get(-0.5)).wait(3000).call(this.endGame, [], this);
+		var tween = c.Tween.get(this, {override:true})
+			.to({speed:-this.speed*0.5}, 3000, c.Ease.get(-0.6))
+			.to({speed:0},4000, c.Ease.get(-0.5)).wait(1000)
+			.call(this.endGame, [], this);
 		
 		var h = this.stats.htmlElement.offsetHeight;
-		c.Tween.get(this.stats).to({y:this.hero.y-h-100*this.scale}, 2500, c.Ease.bounceOut).wait(6500).to({alpha:0},1000);
-		tween.on("change", this.alignStats, this);
+		c.Tween.get(this.stats)
+			.to({y:this.hero.y-h-100*this.scale}, 2500, c.Ease.bounceOut)
+			.wait(4500).to({alpha:0},1000)
+			.on("change", this.alignStats, this);
 	}
 
 	p.alignStats = function(evt) {
@@ -255,9 +263,6 @@
 	}
 	
 	p.endGame = function() {
-		// this pre-composites the game visuals, which makes the view transition smoother:
-		this.view.cache(0,0,this.width,this.height);
-		
 		// clean up listeners, and remove sprites:
 		this.view.off("tick", this.tickListener);
 		while (this.sprites.length) {

@@ -1,6 +1,7 @@
 (function (lib, img, cjs) {
 
 var p; // shortcut to reference prototypes
+var rect; // used to reference frame bounds
 
 // library properties:
 lib.properties = {
@@ -71,7 +72,8 @@ lib.properties = {
 
 	this.addChild(this.instance_9,this.instance_8,this.instance_7,this.instance_6,this.bgGround,this.instance_5,this.instance_4,this.instance_3,this.instance_2,this.instance_1,this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(399.5,388.1,813.1,525.8);
+p.nominalBounds = rect = new cjs.Rectangle(399.5,388.1,813.1,525.8);
+p.frameBounds = [rect];
 
 
 // symbols:
@@ -329,7 +331,8 @@ p.nominalBounds = new cjs.Rectangle(399.5,388.1,813.1,525.8);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_22,p:{scaleX:0.366,scaleY:0.366,x:-6.7}},{t:this.shape_21,p:{scaleX:0.366,scaleY:0.366,x:-6.7}},{t:this.shape_20,p:{scaleX:0.366,scaleY:0.366,y:9.9}},{t:this.shape_19,p:{scaleX:0.366,scaleY:0.366,x:-7.2,y:-23.3}},{t:this.shape_18},{t:this.shape_17},{t:this.shape_16},{t:this.shape_15},{t:this.shape_14},{t:this.shape_13},{t:this.shape_12},{t:this.shape_11},{t:this.shape_10},{t:this.shape_9},{t:this.shape_8},{t:this.shape_7},{t:this.shape_6},{t:this.shape_5},{t:this.shape_4},{t:this.shape_3},{t:this.shape_2},{t:this.shape_1},{t:this.shape}]}).to({state:[{t:this.shape_22,p:{scaleX:0.402,scaleY:0.402,x:-6.6}},{t:this.shape_21,p:{scaleX:0.402,scaleY:0.402,x:-6.6}},{t:this.shape_20,p:{scaleX:0.402,scaleY:0.402,y:11.1}},{t:this.shape_19,p:{scaleX:0.402,scaleY:0.402,x:-7.3,y:-25.4}},{t:this.shape_41},{t:this.shape_40},{t:this.shape_39},{t:this.shape_38},{t:this.shape_37},{t:this.shape_36},{t:this.shape_35},{t:this.shape_34},{t:this.shape_33},{t:this.shape_32},{t:this.shape_31},{t:this.shape_30},{t:this.shape_29},{t:this.shape_28},{t:this.shape_27},{t:this.shape_26},{t:this.shape_25},{t:this.shape_24},{t:this.shape_23}]},1).to({state:[{t:this.shape_22,p:{scaleX:0.349,scaleY:0.349,x:-6.7}},{t:this.shape_21,p:{scaleX:0.349,scaleY:0.349,x:-6.7}},{t:this.shape_20,p:{scaleX:0.349,scaleY:0.349,y:9.3}},{t:this.shape_19,p:{scaleX:0.349,scaleY:0.349,x:-7.2,y:-22.3}},{t:this.shape_60},{t:this.shape_59},{t:this.shape_58},{t:this.shape_57},{t:this.shape_56},{t:this.shape_55},{t:this.shape_54},{t:this.shape_53},{t:this.shape_52},{t:this.shape_51},{t:this.shape_50},{t:this.shape_49},{t:this.shape_48},{t:this.shape_47},{t:this.shape_46},{t:this.shape_45},{t:this.shape_44},{t:this.shape_43},{t:this.shape_42}]},1).to({state:[{t:this.shape_22,p:{scaleX:0.349,scaleY:0.349,x:-6.7}},{t:this.shape_21,p:{scaleX:0.349,scaleY:0.349,x:-6.7}}]},1).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-136.3,-28.4,259.2,53);
+p.nominalBounds = rect = new cjs.Rectangle(-136.3,-28.4,259.2,53);
+p.frameBounds = [rect, new cjs.Rectangle(-149.1,-31.1,285.2,58.3), rect=new cjs.Rectangle(-130.3,-27.2,247.2,50.6), rect];
 
 
 (lib.logowords = function() {
@@ -526,7 +529,8 @@ p.nominalBounds = new cjs.Rectangle(-136.3,-28.4,259.2,53);
 
 	this.addChild(this.shape_46,this.shape_45,this.shape_44,this.shape_43,this.shape_42,this.shape_41,this.shape_40,this.shape_39,this.shape_38,this.shape_37,this.shape_36,this.shape_35,this.shape_34,this.shape_33,this.shape_32,this.shape_31,this.shape_30,this.shape_29,this.shape_28,this.shape_27,this.shape_26,this.shape_25,this.shape_24,this.shape_23,this.shape_22,this.shape_21,this.shape_20,this.shape_19,this.shape_18,this.shape_17,this.shape_16,this.shape_15,this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,-166.4,284.7,166.4);
+p.nominalBounds = rect = new cjs.Rectangle(0,-166.4,284.7,166.4);
+p.frameBounds = [rect];
 
 
 (lib.logohead = function() {
@@ -611,7 +615,8 @@ p.nominalBounds = new cjs.Rectangle(0,-166.4,284.7,166.4);
 
 	this.addChild(this.shape_18,this.shape_17,this.shape_16,this.shape_15,this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,-132.1,165,132.1);
+p.nominalBounds = rect = new cjs.Rectangle(0,-132.1,165,132.1);
+p.frameBounds = [rect];
 
 
 (lib.logohand = function() {
@@ -680,7 +685,8 @@ p.nominalBounds = new cjs.Rectangle(0,-132.1,165,132.1);
 
 	this.addChild(this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,-99.2,64.9,99.3);
+p.nominalBounds = rect = new cjs.Rectangle(0,-99.2,64.9,99.3);
+p.frameBounds = [rect];
 
 
 (lib.logobody = function() {
@@ -741,7 +747,8 @@ p.nominalBounds = new cjs.Rectangle(0,-99.2,64.9,99.3);
 
 	this.addChild(this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,-68.7,92.4,68.7);
+p.nominalBounds = rect = new cjs.Rectangle(0,-68.7,92.4,68.7);
+p.frameBounds = [rect];
 
 
 (lib.logoarm = function() {
@@ -770,7 +777,8 @@ p.nominalBounds = new cjs.Rectangle(0,-68.7,92.4,68.7);
 
 	this.addChild(this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,-70.3,95.4,70.3);
+p.nominalBounds = rect = new cjs.Rectangle(0,-70.3,95.4,70.3);
+p.frameBounds = [rect];
 
 
 (lib.BGMidDeco = function(mode,startPosition,loop) {
@@ -796,7 +804,8 @@ p.nominalBounds = new cjs.Rectangle(0,-70.3,95.4,70.3);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape}]}).to({state:[{t:this.shape_1}]},1).to({state:[{t:this.shape_2}]},1).to({state:[{t:this.shape_3}]},1).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-33,-28.9,66.8,28.9);
+p.nominalBounds = rect = new cjs.Rectangle(-33,-28.9,66.8,28.9);
+p.frameBounds = [rect, new cjs.Rectangle(-26.1,-90.1,41.3,88.3), new cjs.Rectangle(-32.3,-138.8,61.6,137.5), new cjs.Rectangle(-35,-98.9,53.1,99.8)];
 
 
 (lib.BGMid = function(mode,startPosition,loop) {
@@ -830,7 +839,8 @@ p.nominalBounds = new cjs.Rectangle(-33,-28.9,66.8,28.9);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape}]}).to({state:[{t:this.shape_3},{t:this.shape_2}]},1).to({state:[{t:this.shape_5},{t:this.shape_4}]},1).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,-160,809.7,160);
+p.nominalBounds = rect = new cjs.Rectangle(0,-160,809.7,160);
+p.frameBounds = [rect, new cjs.Rectangle(0,-161,810,161), new cjs.Rectangle(0,-167.3,810,167.4)];
 
 
 (lib.BGFrontDeco = function(mode,startPosition,loop) {
@@ -848,7 +858,8 @@ p.nominalBounds = new cjs.Rectangle(0,-160,809.7,160);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape}]}).to({state:[{t:this.shape_1}]},1).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-54.1,-34.7,108.3,34.8);
+p.nominalBounds = rect = new cjs.Rectangle(-54.1,-34.7,108.3,34.8);
+p.frameBounds = [rect, new cjs.Rectangle(-48.4,-32.5,97,32.6)];
 
 
 (lib.BGFront = function() {
@@ -861,7 +872,8 @@ p.nominalBounds = new cjs.Rectangle(-54.1,-34.7,108.3,34.8);
 
 	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-400.3,-170,800.6,170);
+p.nominalBounds = rect = new cjs.Rectangle(-400.3,-170,800.6,170);
+p.frameBounds = [rect];
 
 
 (lib.BGCloud = function(mode,startPosition,loop) {
@@ -880,7 +892,8 @@ p.nominalBounds = new cjs.Rectangle(-400.3,-170,800.6,170);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape}]}).to({state:[{t:this.shape_1}]},1).to({state:[{t:this.shape_2}]},1).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-141.3,-38.2,282.6,76.5);
+p.nominalBounds = rect = new cjs.Rectangle(-141.3,-38.2,282.6,76.5);
+p.frameBounds = [rect, new cjs.Rectangle(-149.3,-48.8,298.7,97.6), new cjs.Rectangle(-72.3,-15.2,144.8,30.4)];
 
 
 (lib.BGBuilding = function(mode,startPosition,loop) {
@@ -914,7 +927,8 @@ p.nominalBounds = new cjs.Rectangle(-141.3,-38.2,282.6,76.5);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape}]}).to({state:[{t:this.shape_3},{t:this.shape_2}]},1).to({state:[{t:this.shape_5},{t:this.shape_4}]},1).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-73.5,-255.4,134.4,257.8);
+p.nominalBounds = rect = new cjs.Rectangle(-73.5,-255.4,134.4,257.8);
+p.frameBounds = [rect, new cjs.Rectangle(-74,-338.1,133.1,341.1), new cjs.Rectangle(-74.5,-267.3,149.5,274.6)];
 
 
 (lib.Shadow = function() {
@@ -927,7 +941,8 @@ p.nominalBounds = new cjs.Rectangle(-73.5,-255.4,134.4,257.8);
 
 	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,0,155.9,35.1);
+p.nominalBounds = rect = new cjs.Rectangle(0,0,155.9,35.1);
+p.frameBounds = [rect];
 
 
 (lib.PinkChunk3 = function() {
@@ -944,7 +959,8 @@ p.nominalBounds = new cjs.Rectangle(0,0,155.9,35.1);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-16.8,-48.1,33.8,48.2);
+p.nominalBounds = rect = new cjs.Rectangle(-16.8,-48.1,33.8,48.2);
+p.frameBounds = [rect];
 
 
 (lib.PinkChunk1 = function() {
@@ -961,7 +977,8 @@ p.nominalBounds = new cjs.Rectangle(-16.8,-48.1,33.8,48.2);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-14.4,-32.7,28.9,32.8);
+p.nominalBounds = rect = new cjs.Rectangle(-14.4,-32.7,28.9,32.8);
+p.frameBounds = [rect];
 
 
 (lib.PinkChunk = function() {
@@ -978,7 +995,8 @@ p.nominalBounds = new cjs.Rectangle(-14.4,-32.7,28.9,32.8);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-9.7,-21.4,19.6,21.4);
+p.nominalBounds = rect = new cjs.Rectangle(-9.7,-21.4,19.6,21.4);
+p.frameBounds = [rect];
 
 
 (lib.TunnelFrontAnim = function() {
@@ -1127,7 +1145,8 @@ p.nominalBounds = new cjs.Rectangle(-9.7,-21.4,19.6,21.4);
 
 	this.addChild(this.shape_34,this.shape_33,this.shape_32,this.shape_31,this.shape_30,this.shape_29,this.shape_28,this.shape_27,this.shape_26,this.shape_25,this.shape_24,this.shape_23,this.shape_22,this.shape_21,this.shape_20,this.shape_19,this.shape_18,this.shape_17,this.shape_16,this.shape_15,this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,-447.4,223.1,447.4);
+p.nominalBounds = rect = new cjs.Rectangle(0,-447.4,223.1,447.4);
+p.frameBounds = [rect];
 
 
 (lib.TunnelBackAnim = function() {
@@ -1196,7 +1215,8 @@ p.nominalBounds = new cjs.Rectangle(0,-447.4,223.1,447.4);
 
 	this.addChild(this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(0,-301.7,132.1,301.7);
+p.nominalBounds = rect = new cjs.Rectangle(0,-301.7,132.1,301.7);
+p.frameBounds = [rect];
 
 
 (lib.SpikeAnim = function() {
@@ -1209,7 +1229,8 @@ p.nominalBounds = new cjs.Rectangle(0,-301.7,132.1,301.7);
 
 	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-8.2,-54.5,16.5,54.5);
+p.nominalBounds = rect = new cjs.Rectangle(-8.2,-54.5,16.5,54.5);
+p.frameBounds = [rect];
 
 
 (lib.Spike3Anim = function() {
@@ -1222,7 +1243,8 @@ p.nominalBounds = new cjs.Rectangle(-8.2,-54.5,16.5,54.5);
 
 	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-12.2,-72.7,24.4,72.7);
+p.nominalBounds = rect = new cjs.Rectangle(-12.2,-72.7,24.4,72.7);
+p.frameBounds = [rect];
 
 
 (lib.Spike2Anim = function() {
@@ -1235,7 +1257,8 @@ p.nominalBounds = new cjs.Rectangle(-12.2,-72.7,24.4,72.7);
 
 	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-8.7,-35.6,17.5,35.6);
+p.nominalBounds = rect = new cjs.Rectangle(-8.7,-35.6,17.5,35.6);
+p.frameBounds = [rect];
 
 
 (lib.LogAnimation = function() {
@@ -1256,7 +1279,8 @@ p.nominalBounds = new cjs.Rectangle(-8.7,-35.6,17.5,35.6);
 
 	this.addChild(this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-64.4,-181.4,125.9,180.8);
+p.nominalBounds = rect = new cjs.Rectangle(-64.4,-181.4,125.9,180.8);
+p.frameBounds = [rect];
 
 
 (lib.MooseToothShine = function() {
@@ -1273,7 +1297,8 @@ p.nominalBounds = new cjs.Rectangle(-64.4,-181.4,125.9,180.8);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-10,-6.9,20.1,6.9);
+p.nominalBounds = rect = new cjs.Rectangle(-10,-6.9,20.1,6.9);
+p.frameBounds = [rect];
 
 
 (lib.MooseEye = function() {
@@ -1334,7 +1359,8 @@ p.nominalBounds = new cjs.Rectangle(-10,-6.9,20.1,6.9);
 
 	this.addChild(this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-63.8,-99,127.6,99.1);
+p.nominalBounds = rect = new cjs.Rectangle(-63.8,-99,127.6,99.1);
+p.frameBounds = [rect];
 
 
 (lib.MooseDeathTop = function() {
@@ -1355,7 +1381,8 @@ p.nominalBounds = new cjs.Rectangle(-63.8,-99,127.6,99.1);
 
 	this.addChild(this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-67.5,-47.8,135.1,47.8);
+p.nominalBounds = rect = new cjs.Rectangle(-67.5,-47.8,135.1,47.8);
+p.frameBounds = [rect];
 
 
 (lib.MooseChunk1 = function() {
@@ -1372,7 +1399,8 @@ p.nominalBounds = new cjs.Rectangle(-67.5,-47.8,135.1,47.8);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-16.3,-36.9,32.7,37);
+p.nominalBounds = rect = new cjs.Rectangle(-16.3,-36.9,32.7,37);
+p.frameBounds = [rect];
 
 
 (lib.MooseBlood = function() {
@@ -1389,7 +1417,8 @@ p.nominalBounds = new cjs.Rectangle(-16.3,-36.9,32.7,37);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-62.7,-27.1,126.8,25.8);
+p.nominalBounds = rect = new cjs.Rectangle(-62.7,-27.1,126.8,25.8);
+p.frameBounds = [rect];
 
 
 (lib.MooseAntler = function() {
@@ -1410,7 +1439,8 @@ p.nominalBounds = new cjs.Rectangle(-62.7,-27.1,126.8,25.8);
 
 	this.addChild(this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-33.3,-62.8,64.7,62.9);
+p.nominalBounds = rect = new cjs.Rectangle(-33.3,-62.8,64.7,62.9);
+p.frameBounds = [rect];
 
 
 (lib.Tween1 = function() {
@@ -1431,7 +1461,8 @@ p.nominalBounds = new cjs.Rectangle(-33.3,-62.8,64.7,62.9);
 
 	this.addChild(this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-23.8,-8.3,47.7,16.6);
+p.nominalBounds = rect = new cjs.Rectangle(-23.8,-8.3,47.7,16.6);
+p.frameBounds = [rect];
 
 
 (lib.SlideLegs = function() {
@@ -1460,7 +1491,8 @@ p.nominalBounds = new cjs.Rectangle(-23.8,-8.3,47.7,16.6);
 
 	this.addChild(this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-160,-145,320.2,145.1);
+p.nominalBounds = rect = new cjs.Rectangle(-160,-145,320.2,145.1);
+p.frameBounds = [rect];
 
 
 (lib.ShotSparks = function() {
@@ -1473,7 +1505,8 @@ p.nominalBounds = new cjs.Rectangle(-160,-145,320.2,145.1);
 
 	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-6.7,-5.4,13.5,5.4);
+p.nominalBounds = rect = new cjs.Rectangle(-6.7,-5.4,13.5,5.4);
+p.frameBounds = [rect];
 
 
 (lib.ShotSpark2 = function() {
@@ -1486,7 +1519,8 @@ p.nominalBounds = new cjs.Rectangle(-6.7,-5.4,13.5,5.4);
 
 	this.addChild(this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-2.4,-16.1,4.8,16.1);
+p.nominalBounds = rect = new cjs.Rectangle(-2.4,-16.1,4.8,16.1);
+p.frameBounds = [rect];
 
 
 (lib.Head = function() {
@@ -1571,7 +1605,8 @@ p.nominalBounds = new cjs.Rectangle(-2.4,-16.1,4.8,16.1);
 
 	this.addChild(this.shape_18,this.shape_17,this.shape_16,this.shape_15,this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-173.6,-161.6,344.6,323.2);
+p.nominalBounds = rect = new cjs.Rectangle(-173.6,-161.6,344.6,323.2);
+p.frameBounds = [rect];
 
 
 (lib.HandFront = function() {
@@ -1620,7 +1655,8 @@ p.nominalBounds = new cjs.Rectangle(-173.6,-161.6,344.6,323.2);
 
 	this.addChild(this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-52.9,-92.9,107.4,186);
+p.nominalBounds = rect = new cjs.Rectangle(-52.9,-92.9,107.4,186);
+p.frameBounds = [rect];
 
 
 (lib.GunHand = function() {
@@ -1665,7 +1701,8 @@ p.nominalBounds = new cjs.Rectangle(-52.9,-92.9,107.4,186);
 
 	this.addChild(this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-80.6,-146.4,161.9,296.4);
+p.nominalBounds = rect = new cjs.Rectangle(-80.6,-146.4,161.9,296.4);
+p.frameBounds = [rect];
 
 
 (lib.Foot = function() {
@@ -1686,7 +1723,8 @@ p.nominalBounds = new cjs.Rectangle(-80.6,-146.4,161.9,296.4);
 
 	this.addChild(this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-12.1,-12.7,24.4,12.8);
+p.nominalBounds = rect = new cjs.Rectangle(-12.1,-12.7,24.4,12.8);
+p.frameBounds = [rect];
 
 
 (lib.DeadEyes = function() {
@@ -1727,7 +1765,8 @@ p.nominalBounds = new cjs.Rectangle(-12.1,-12.7,24.4,12.8);
 
 	this.addChild(this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-14.9,-123.9,29.9,124);
+p.nominalBounds = rect = new cjs.Rectangle(-14.9,-123.9,29.9,124);
+p.frameBounds = [rect];
 
 
 (lib.DeadBlood = function() {
@@ -1744,7 +1783,8 @@ p.nominalBounds = new cjs.Rectangle(-14.9,-123.9,29.9,124);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-87.5,-41.6,170.7,44.9);
+p.nominalBounds = rect = new cjs.Rectangle(-87.5,-41.6,170.7,44.9);
+p.frameBounds = [rect];
 
 
 (lib.Body = function() {
@@ -1837,7 +1877,8 @@ p.nominalBounds = new cjs.Rectangle(-87.5,-41.6,170.7,44.9);
 
 	this.addChild(this.shape_20,this.shape_19,this.shape_18,this.shape_17,this.shape_16,this.shape_15,this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-108.5,-123.8,214.6,247.5);
+p.nominalBounds = rect = new cjs.Rectangle(-108.5,-123.8,214.6,247.5);
+p.frameBounds = [rect];
 
 
 (lib.ArmShoot = function() {
@@ -1866,7 +1907,8 @@ p.nominalBounds = new cjs.Rectangle(-108.5,-123.8,214.6,247.5);
 
 	this.addChild(this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-89.3,-72.6,193.6,49.3);
+p.nominalBounds = rect = new cjs.Rectangle(-89.3,-72.6,193.6,49.3);
+p.frameBounds = [rect];
 
 
 (lib.ArmFront = function() {
@@ -1895,7 +1937,8 @@ p.nominalBounds = new cjs.Rectangle(-89.3,-72.6,193.6,49.3);
 
 	this.addChild(this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-62.9,-94,124.6,188.1);
+p.nominalBounds = rect = new cjs.Rectangle(-62.9,-94,124.6,188.1);
+p.frameBounds = [rect];
 
 
 (lib.ArmBack = function() {
@@ -1924,7 +1967,8 @@ p.nominalBounds = new cjs.Rectangle(-62.9,-94,124.6,188.1);
 
 	this.addChild(this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-88.6,-48.1,175.7,96.2);
+p.nominalBounds = rect = new cjs.Rectangle(-88.6,-48.1,175.7,96.2);
+p.frameBounds = [rect];
 
 
 (lib.GreenChunk3 = function() {
@@ -1941,7 +1985,8 @@ p.nominalBounds = new cjs.Rectangle(-88.6,-48.1,175.7,96.2);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-15.3,-31.7,30.7,31.8);
+p.nominalBounds = rect = new cjs.Rectangle(-15.3,-31.7,30.7,31.8);
+p.frameBounds = [rect];
 
 
 (lib.GreenChunk2 = function() {
@@ -1962,7 +2007,8 @@ p.nominalBounds = new cjs.Rectangle(-15.3,-31.7,30.7,31.8);
 
 	this.addChild(this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-21.4,-56.9,42.8,57);
+p.nominalBounds = rect = new cjs.Rectangle(-21.4,-56.9,42.8,57);
+p.frameBounds = [rect];
 
 
 (lib.GreenChunk1 = function() {
@@ -1979,7 +2025,8 @@ p.nominalBounds = new cjs.Rectangle(-21.4,-56.9,42.8,57);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-20.7,-45.4,41.5,45.5);
+p.nominalBounds = rect = new cjs.Rectangle(-20.7,-45.4,41.5,45.5);
+p.frameBounds = [rect];
 
 
 (lib.EnemyBeaverFace = function() {
@@ -2052,7 +2099,8 @@ p.nominalBounds = new cjs.Rectangle(-20.7,-45.4,41.5,45.5);
 
 	this.addChild(this.shape_15,this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-52.5,-179.4,105,179.4);
+p.nominalBounds = rect = new cjs.Rectangle(-52.5,-179.4,105,179.4);
+p.frameBounds = [rect];
 
 
 (lib.EnemyBeaverBody = function() {
@@ -2109,7 +2157,8 @@ p.nominalBounds = new cjs.Rectangle(-52.5,-179.4,105,179.4);
 
 	this.addChild(this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-86,-219.5,172.1,219.5);
+p.nominalBounds = rect = new cjs.Rectangle(-86,-219.5,172.1,219.5);
+p.frameBounds = [rect];
 
 
 (lib.EarChunk1 = function() {
@@ -2126,7 +2175,8 @@ p.nominalBounds = new cjs.Rectangle(-86,-219.5,172.1,219.5);
 
 	this.addChild(this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-10.7,-34.9,21.4,34.9);
+p.nominalBounds = rect = new cjs.Rectangle(-10.7,-34.9,21.4,34.9);
+p.frameBounds = [rect];
 
 
 (lib.BloodSplat1 = function() {
@@ -2151,7 +2201,8 @@ p.nominalBounds = new cjs.Rectangle(-10.7,-34.9,21.4,34.9);
 
 	this.addChild(this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-71.7,-38.7,143.6,38.7);
+p.nominalBounds = rect = new cjs.Rectangle(-71.7,-38.7,143.6,38.7);
+p.frameBounds = [rect];
 
 
 (lib.BloodDrop1 = function() {
@@ -2172,7 +2223,8 @@ p.nominalBounds = new cjs.Rectangle(-71.7,-38.7,143.6,38.7);
 
 	this.addChild(this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-14.6,-14.5,29.2,14.5);
+p.nominalBounds = rect = new cjs.Rectangle(-14.6,-14.5,29.2,14.5);
+p.frameBounds = [rect];
 
 
 (lib.BeaverTooth2 = function() {
@@ -2197,7 +2249,8 @@ p.nominalBounds = new cjs.Rectangle(-14.6,-14.5,29.2,14.5);
 
 	this.addChild(this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-21.4,-45.4,42.8,45.4);
+p.nominalBounds = rect = new cjs.Rectangle(-21.4,-45.4,42.8,45.4);
+p.frameBounds = [rect];
 
 
 (lib.BeaverTooth1 = function() {
@@ -2222,7 +2275,8 @@ p.nominalBounds = new cjs.Rectangle(-21.4,-45.4,42.8,45.4);
 
 	this.addChild(this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-23.5,-53.8,47,53.8);
+p.nominalBounds = rect = new cjs.Rectangle(-23.5,-53.8,47,53.8);
+p.frameBounds = [rect];
 
 
 (lib.BeaverNose = function() {
@@ -2247,7 +2301,8 @@ p.nominalBounds = new cjs.Rectangle(-23.5,-53.8,47,53.8);
 
 	this.addChild(this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-52.5,-79.3,105,79.3);
+p.nominalBounds = rect = new cjs.Rectangle(-52.5,-79.3,105,79.3);
+p.frameBounds = [rect];
 
 
 (lib.BeaverEyePop = function() {
@@ -2276,7 +2331,8 @@ p.nominalBounds = new cjs.Rectangle(-52.5,-79.3,105,79.3);
 
 	this.addChild(this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-31.5,-87.5,63,87.5);
+p.nominalBounds = rect = new cjs.Rectangle(-31.5,-87.5,63,87.5);
+p.frameBounds = [rect];
 
 
 (lib.BeaverEye = function() {
@@ -2305,7 +2361,8 @@ p.nominalBounds = new cjs.Rectangle(-31.5,-87.5,63,87.5);
 
 	this.addChild(this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-31.5,-87.5,63,87.5);
+p.nominalBounds = rect = new cjs.Rectangle(-31.5,-87.5,63,87.5);
+p.frameBounds = [rect];
 
 
 (lib.BeaverBody = function() {
@@ -2374,7 +2431,8 @@ p.nominalBounds = new cjs.Rectangle(-31.5,-87.5,63,87.5);
 
 	this.addChild(this.shape_14,this.shape_13,this.shape_12,this.shape_11,this.shape_10,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-86,-219.5,172.1,219.5);
+p.nominalBounds = rect = new cjs.Rectangle(-86,-219.5,172.1,219.5);
+p.frameBounds = [rect];
 
 
 (lib.MenuBG = function() {
@@ -2419,7 +2477,8 @@ p.nominalBounds = new cjs.Rectangle(-86,-219.5,172.1,219.5);
 
 	this.addChild(this.instance_10,this.bgGround,this.instance_9,this.instance_8,this.instance_7,this.instance_6,this.instance_5,this.instance_4,this.instance_3,this.instance_2,this.instance_1,this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-12.1,0,821.8,552.6);
+p.nominalBounds = rect = new cjs.Rectangle(-12.1,0,821.8,552.6);
+p.frameBounds = [rect];
 
 
 (lib.logo = function(mode,startPosition,loop) {
@@ -2475,7 +2534,8 @@ p.nominalBounds = new cjs.Rectangle(-12.1,0,821.8,552.6);
 	this.timeline.addTween(cjs.Tween.get(this.instance_4).wait(9).to({_off:false},0).wait(6).to({regX:92.7,regY:-15.2,rotation:0,x:144.7,y:140.7},14,cjs.Ease.get(1)).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(131.6,292.9,20.6,12);
+p.nominalBounds = rect = new cjs.Rectangle(131.6,292.9,20.6,12);
+p.frameBounds = [rect, rect, rect, rect, rect, rect, rect, rect, rect, rect=new cjs.Rectangle(0.6,92.2,284.7,222.9), rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect=new cjs.Rectangle(0.6,0.2,284.7,314.9), rect, rect, rect, rect, rect];
 
 
 (lib.EnemyBeaver = function(mode,startPosition,loop) {
@@ -2627,7 +2687,9 @@ p.nominalBounds = new cjs.Rectangle(131.6,292.9,20.6,12);
 	this.timeline.addTween(cjs.Tween.get(this.instance_19).wait(24).to({scaleX:0.93,x:1.1},3).to({scaleX:1.09,x:-11.4},4).wait(7));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-96.4,-219.5,182.5,230);
+p.nominalBounds = rect = new cjs.Rectangle(-96.4,-219.5,182.5,230);
+p.frameBounds = [rect,new cjs.Rectangle(-96.4,-211.7,186.2,222.2),new cjs.Rectangle(-96.4,-203.9,189.8,214.4),new cjs.Rectangle(-96.9,-196.2,193.8,206.7),new cjs.Rectangle(-100.5,-188.4,201.1,198.9),new cjs.Rectangle(-101.6,-201,198.9,211.5),new cjs.Rectangle(-103,-213.5,196.7,224),new cjs.Rectangle(-105.4,-225.7,195.4,236.2),new cjs.Rectangle(-108.8,-237.4,195.2,247.9),new cjs.Rectangle(-112,-227,205.9,237.5),new cjs.Rectangle(-116.1,-220,220,231.9),new cjs.Rectangle(-120.2,-213,232.9,228.8),new cjs.Rectangle(-100.5,-188.4,201.1,198.9),new cjs.Rectangle(-97.5,-204.5,198.5,215),new cjs.Rectangle(-96.4,-220.4,198.3,230.9),new cjs.Rectangle(-96.4,-235.9,200.4,246.4),new cjs.Rectangle(-96.4,-251.3,202.8,261.8),new cjs.Rectangle(-99.3,-239.6,201.4,250.1),new cjs.Rectangle(-109.7,-227.8,216.6,238.3),new cjs.Rectangle(-118.7,-216,230.3,228.5),new cjs.Rectangle(-100.5,-188.4,201.1,198.9),new cjs.Rectangle(-96.4,-198.8,192.2,209.3),new cjs.Rectangle(-96.4,-209.1,187.4,219.6),new cjs.Rectangle(-96.4,-219.5,182.5,230),new cjs.Rectangle(-96.4,-225,184,235.5),new cjs.Rectangle(-88.1,-234,238.2,244.5),new cjs.Rectangle(-82.2,-243.8,314.2,254.3),new cjs.Rectangle(-80.6,-251.5,363,262),new cjs.Rectangle(-101.1,-256.7,433.8,270.6),new cjs.Rectangle(-119.4,-247.5,502.5,278.8),new cjs.Rectangle(-137.5,-234.1,524.7,280.7),new cjs.Rectangle(-98.6,-206.8,490,252.5),new cjs.Rectangle(-98.9,-207.4,494.4,253.5),new cjs.Rectangle(-99.2,-207.9,499,254.5),new cjs.Rectangle(-99.5,-208.4,503.6,255.4),new cjs.Rectangle(-96.4,-208.8,504.7,252.7),new cjs.Rectangle(-96.4,-206.8,504.7,250.7),new cjs.Rectangle(-96.4,-204.7,504.7,248.6)
+];
 
 
 (lib.Spike3 = function(mode,startPosition,loop) {
@@ -2640,7 +2702,8 @@ p.nominalBounds = new cjs.Rectangle(-96.4,-219.5,182.5,230);
 	this.timeline.addTween(cjs.Tween.get(this.instance).to({scaleY:0.91,rotation:2,y:-1.8},4).to({scaleY:1,rotation:0,y:-1.9},5).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-12.2,-72.7,24.4,72.7);
+p.nominalBounds = rect = new cjs.Rectangle(-12.2,-72.7,24.4,72.7);
+p.frameBounds = [rect, rect, rect, rect, rect=new cjs.Rectangle(-12.2,-66.3,26.7,66.8), rect, rect, rect, rect, new cjs.Rectangle(-12.2,-72.7,24.4,72.7)];
 
 
 (lib.Spike2 = function(mode,startPosition,loop) {
@@ -2653,7 +2716,8 @@ p.nominalBounds = new cjs.Rectangle(-12.2,-72.7,24.4,72.7);
 	this.timeline.addTween(cjs.Tween.get(this.instance).to({scaleX:0.89,scaleY:0.88,rotation:-2.2},5).to({scaleX:1,scaleY:1,rotation:4},6).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-8.8,-36.5,19.9,36.7);
+p.nominalBounds = rect = new cjs.Rectangle(-8.8,-36.5,19.9,36.7);
+p.frameBounds = [rect, rect, rect, rect, rect, rect=new cjs.Rectangle(-8.4,-31.5,16.8,31.9), rect, rect, rect, rect, rect, new cjs.Rectangle(-8.8,-36.5,19.9,36.7)];
 
 
 (lib.Spike1 = function(mode,startPosition,loop) {
@@ -2666,7 +2730,8 @@ p.nominalBounds = new cjs.Rectangle(-8.8,-36.5,19.9,36.7);
 	this.timeline.addTween(cjs.Tween.get(this.instance).to({scaleX:0.96,scaleY:0.89,rotation:-2.5},4).to({scaleX:1,scaleY:1,rotation:0},4).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-8.2,-54.5,16.5,54.5);
+p.nominalBounds = rect = new cjs.Rectangle(-8.2,-54.5,16.5,54.5);
+p.frameBounds = [rect, rect, rect, rect, rect=new cjs.Rectangle(-9.8,-48.6,17.9,49.1), rect, rect, rect, new cjs.Rectangle(-8.2,-54.5,16.5,54.5)];
 
 
 (lib.MooseTween = function() {
@@ -2716,7 +2781,8 @@ p.nominalBounds = new cjs.Rectangle(-8.2,-54.5,16.5,54.5);
 
 	this.addChild(this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape,this.instance_2,this.instance_1,this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-76.1,-96.7,152.3,193.1);
+p.nominalBounds = rect = new cjs.Rectangle(-76.1,-96.7,152.3,193.1);
+p.frameBounds = [rect];
 
 
 (lib.MooseEyes = function() {
@@ -2733,7 +2799,8 @@ p.nominalBounds = new cjs.Rectangle(-76.1,-96.7,152.3,193.1);
 
 	this.addChild(this.shape,this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-63.4,-108.9,127.6,104);
+p.nominalBounds = rect = new cjs.Rectangle(-63.4,-108.9,127.6,104);
+p.frameBounds = [rect];
 
 
 (lib.MooseDeathEyes = function() {
@@ -2745,7 +2812,8 @@ p.nominalBounds = new cjs.Rectangle(-63.4,-108.9,127.6,104);
 
 	this.addChild(this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-63,-108.7,127.6,99.1);
+p.nominalBounds = rect = new cjs.Rectangle(-63,-108.7,127.6,99.1);
+p.frameBounds = [rect];
 
 
 (lib.MooseDeathEyeBlood = function() {
@@ -2757,7 +2825,8 @@ p.nominalBounds = new cjs.Rectangle(-63,-108.7,127.6,99.1);
 
 	this.addChild(this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-79.2,-48.7,157.9,56.5);
+p.nominalBounds = rect = new cjs.Rectangle(-79.2,-48.7,157.9,56.5);
+p.frameBounds = [rect];
 
 
 (lib.MooseBottomDeath = function() {
@@ -2807,7 +2876,8 @@ p.nominalBounds = new cjs.Rectangle(-79.2,-48.7,157.9,56.5);
 
 	this.addChild(this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape,this.instance_2,this.instance_1,this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-76.2,-112.7,152.3,113.3);
+p.nominalBounds = rect = new cjs.Rectangle(-76.2,-112.7,152.3,113.3);
+p.frameBounds = [rect];
 
 
 (lib.LegsJump = function() {
@@ -2843,7 +2913,8 @@ p.nominalBounds = new cjs.Rectangle(-76.2,-112.7,152.3,113.3);
 
 	this.addChild(this.instance_1,this.instance,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-19.5,-0.4,275.6,186.7);
+p.nominalBounds = rect = new cjs.Rectangle(-19.5,-0.4,275.6,186.7);
+p.frameBounds = [rect];
 
 
 (lib.HeroLegs = function(mode,startPosition,loop) {
@@ -3009,7 +3080,8 @@ p.nominalBounds = new cjs.Rectangle(-19.5,-0.4,275.6,186.7);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1,p:{rotation:0,x:48.2,y:72.7,regY:-11.5}},{t:this.instance,p:{rotation:0,x:94.2,y:70.2,regY:-11.5}}]}).to({state:[{t:this.instance_1,p:{rotation:91.5,x:17.8,y:49.7,regY:-11.5}},{t:this.instance,p:{rotation:-22.2,x:115.2,y:54.7,regY:-11.5}}]},2).to({state:[{t:this.instance_1,p:{rotation:138,x:36.8,y:48.8,regY:-11.5}},{t:this.instance,p:{rotation:-34.9,x:114.2,y:73.7,regY:-11.5}}]},2).to({state:[{t:this.instance_1,p:{rotation:114.3,x:52.3,y:48.8,regY:-11.5}},{t:this.instance,p:{rotation:-1.5,x:69.2,y:69.7,regY:-11.5}}]},2).to({state:[{t:this.instance_1,p:{rotation:-54.2,x:96.1,y:58.7,regY:-11.5}},{t:this.instance,p:{rotation:65.6,x:53.7,y:41.2,regY:-11.6}}]},2).to({state:[{t:this.instance_1,p:{rotation:-8.3,x:78.2,y:72.3,regY:-11.4}},{t:this.instance,p:{rotation:125.8,x:70.2,y:47.8,regY:-11.6}}]},2).wait(2));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(39.5,0.8,71.9,83.4);
+p.nominalBounds = rect = new cjs.Rectangle(39.5,0.8,71.9,83.4);
+p.frameBounds = [rect, rect, rect=new cjs.Rectangle(5.8,0.8,129.6,67.2), rect, rect=new cjs.Rectangle(15.6,1.2,119.1,84.8), rect, rect=new cjs.Rectangle(34.3,0.1,71.8,80.8), rect, rect=new cjs.Rectangle(39.4,0.5,76.7,70), rect, rect=new cjs.Rectangle(39.2,-0.6,69.3,85.1), rect];
 
 
 (lib.HeroBulletAnim = function() {
@@ -3025,7 +3097,8 @@ p.nominalBounds = new cjs.Rectangle(39.5,0.8,71.9,83.4);
 
 	this.addChild(this.instance,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-23.8,-16.5,47.7,16.6);
+p.nominalBounds = rect = new cjs.Rectangle(-23.8,-16.5,47.7,16.6);
+p.frameBounds = [rect];
 
 
 (lib.GunShoot = function() {
@@ -3037,7 +3110,8 @@ p.nominalBounds = new cjs.Rectangle(-23.8,-16.5,47.7,16.6);
 
 	this.addChild(this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-0.7,0.5,108.2,64.6);
+p.nominalBounds = rect = new cjs.Rectangle(-0.7,0.5,108.2,64.6);
+p.frameBounds = [rect];
 
 
 (lib.DeadLegs = function() {
@@ -3092,7 +3166,8 @@ p.nominalBounds = new cjs.Rectangle(-0.7,0.5,108.2,64.6);
 
 	this.addChild(this.instance_1,this.instance,this.shape_9,this.shape_8,this.shape_7,this.shape_6,this.shape_5,this.shape_4,this.shape_3,this.shape_2,this.shape_1,this.shape);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(-125.8,-211.7,233.3,205.8);
+p.nominalBounds = rect = new cjs.Rectangle(-125.8,-211.7,233.3,205.8);
+p.frameBounds = [rect];
 
 
 (lib.Trap = function(mode,startPosition,loop) {
@@ -3142,7 +3217,8 @@ p.nominalBounds = new cjs.Rectangle(-125.8,-211.7,233.3,205.8);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).to({state:[{t:this.shape},{t:this.instance_9},{t:this.instance_8},{t:this.instance_7},{t:this.instance_6},{t:this.instance_5},{t:this.instance_4},{t:this.instance_3},{t:this.instance_2}]},1).to({state:[{t:this.instance_10}]},1).to({state:[{t:this.instance_11}]},1).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-64.4,-171.4,126.9,192.9);
+p.nominalBounds = rect = new cjs.Rectangle(-64.4,-171.4,126.9,192.9);
+p.frameBounds = [rect, new cjs.Rectangle(-76.9,-163.9,156.9,171.9), new cjs.Rectangle(-62.5,-406.9,132.1,301.7), new cjs.Rectangle(-30,-438.8,223.1,447.4)];
 
 
 (lib.HeroBullet = function(mode,startPosition,loop) {
@@ -3230,7 +3306,8 @@ p.nominalBounds = new cjs.Rectangle(-64.4,-171.4,126.9,192.9);
 	this.timeline.addTween(cjs.Tween.get(this.instance_20).to({regX:21.6,scaleX:0.87,scaleY:1.06,x:-2.1},2).to({scaleX:0.64,scaleY:1.87,x:-1.6},2).to({regX:21.5,scaleX:1.16,scaleY:0.61,x:-2.2},2).to({_off:true},1).wait(4));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-60.1,-4.6,60.9,10.1);
+p.nominalBounds = rect = new cjs.Rectangle(-60.1,-4.6,60.9,10.1);
+p.frameBounds = [rect, rect, rect=new cjs.Rectangle(-41.6,-8.5,41.4,17.5), rect, rect=new cjs.Rectangle(-30.6,-15.6,30.4,31), rect, new cjs.Rectangle(-54.7,-4.6,55.2,10.1), new cjs.Rectangle(-3.3,-5.3,3.2,10.7), new cjs.Rectangle(-21.4,-25.4,22.8,45.2), new cjs.Rectangle(-27.6,-29.8,29,62.8), new cjs.Rectangle(-38.2,-40.5,38.1,83.2)];
 
 
 (lib.Hero = function(mode,startPosition,loop) {
@@ -3348,7 +3425,8 @@ p.nominalBounds = new cjs.Rectangle(-60.1,-4.6,60.9,10.1);
 	this.timeline.addTween(cjs.Tween.get(this.instance_15).wait(48).to({_off:false},0).to({scaleX:2.13,x:414.1},6).to({scaleX:2.24,scaleY:1.22,x:422.5,y:27.7},6).to({_off:true},1).wait(28).to({_off:false,scaleX:1,scaleY:1,rotation:-0.5,x:49.5,y:-3},0).wait(1).to({scaleX:1.09},0).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-58.7,-261.7,170.1,272.2);
+p.nominalBounds = rect = new cjs.Rectangle(-58.7,-261.7,170.1,272.2);
+p.frameBounds = [rect, rect=new cjs.Rectangle(-70.2,-268,184.9,278.4), rect, rect, rect, rect, rect=new cjs.Rectangle(-73.6,-269.7,189,280.1), rect, rect, rect, rect, rect, new cjs.Rectangle(-58.7,-261.7,170.1,272.2), new cjs.Rectangle(-68.8,-269.7,184.3,280.1), new cjs.Rectangle(-68.8,-269.7,197,280.1), rect=new cjs.Rectangle(-73.6,-269.7,267.6,280.2), rect, rect=new cjs.Rectangle(-72.8,-269.8,257.2,280.3), rect, rect, new cjs.Rectangle(-72.8,-278.9,178.8,289.3), rect=new cjs.Rectangle(-72.8,-274.1,177.5,284.5), rect, rect, new cjs.Rectangle(-73.6,-269.7,197.1,280.1), rect=new cjs.Rectangle(-58.7,-318,172.1,328.4), rect, rect=new cjs.Rectangle(-83.6,-401.6,213.5,412), rect, rect=new cjs.Rectangle(-126.2,-405.3,260.3,415.8), rect, new cjs.Rectangle(-118.3,-418.6,252,429), new cjs.Rectangle(-118.3,-418.6,252,424.6), rect=new cjs.Rectangle(-89.5,-414.5,218.8,420.6), rect, rect=new cjs.Rectangle(-104.3,-355.2,259.7,361.3), rect, rect, new cjs.Rectangle(-58.7,-261.7,170.1,272.2), rect=new cjs.Rectangle(-58.7,-261.7,510.8,294.1), rect, rect, rect, rect, rect, rect, rect, rect, rect=new cjs.Rectangle(217.5,-77.2,383,135.4), rect, rect, rect, rect, rect, rect=new cjs.Rectangle(227.4,-66.3,383.1,124.7), rect, rect, rect, rect, rect, new cjs.Rectangle(226.9,-66.3,383.6,124.6), new cjs.Rectangle(-101.7,-261.7,213.1,295.1), rect=new cjs.Rectangle(-101.7,-261.7,220.3,295.1), rect, rect, rect, new cjs.Rectangle(-110.3,-210.5,255.6,248.9), rect=new cjs.Rectangle(-113.9,-210.5,259.3,248.9), rect, rect, rect=new cjs.Rectangle(-116.1,-208.6,261.5,244.9), rect, rect, rect=new cjs.Rectangle(-110.3,-247.8,255.6,286.3), rect, rect, new cjs.Rectangle(-58.7,-261.7,204,272.2), rect=new cjs.Rectangle(-83.8,-272.9,219.6,283.3), rect, rect, rect, rect=new cjs.Rectangle(-87.7,-220.2,253.7,230.6), rect, rect, rect, new cjs.Rectangle(-87.7,-220.2,262.5,230.6), rect=new cjs.Rectangle(-87.5,-155.1,262.3,172.3), rect, new cjs.Rectangle(-86.4,-139.7,260.7,156.9), new cjs.Rectangle(-86.4,-139.7,267.3,159.6), new cjs.Rectangle(-86.1,-141.2,265.1,172.6)];
 
 
 (lib.EnemyMoose = function(mode,startPosition,loop) {
@@ -3462,7 +3540,8 @@ p.nominalBounds = new cjs.Rectangle(-58.7,-261.7,170.1,272.2);
 	this.timeline.addTween(cjs.Tween.get(this.instance_15).wait(27).to({_off:false},0).to({regY:-21,scaleX:1.23,scaleY:0.72,y:12.4},3).to({scaleX:1.26,scaleY:0.84},4).to({regY:-20.9,scaleX:1.27,scaleY:0.91,y:12.5},2).wait(1));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-130.9,-211.3,254.2,211.1);
+p.nominalBounds = rect = new cjs.Rectangle(-130.9,-211.3,254.2,211.1);
+p.frameBounds = [rect,new cjs.Rectangle(-132.9,-204.6,256.7,204.8),new cjs.Rectangle(-134.9,-197.9,259.1,198.5),new cjs.Rectangle(-134.9,-221,260.5,220.5),new cjs.Rectangle(-134.6,-244.2,261.2,242.7),new cjs.Rectangle(-127.1,-267.3,247.3,264.6),new cjs.Rectangle(-128.9,-269.5,252.4,266.8),new cjs.Rectangle(-125.9,-271.8,244,269.1),new cjs.Rectangle(-128.9,-247.2,249.1,245.6),new cjs.Rectangle(-131.9,-222.5,254.2,222),new cjs.Rectangle(-134.9,-197.9,259.1,198.5),new cjs.Rectangle(-138.1,-193.4,266.6,194),new cjs.Rectangle(-139.7,-188.9,270.7,189.5),new cjs.Rectangle(-138.9,-196.4,269.1,196.7),new cjs.Rectangle(-137.9,-203.8,267.5,203.9),new cjs.Rectangle(-130.9,-211.3,254.2,211.1),new cjs.Rectangle(-130.9,-211.1,254.2,210.9),new cjs.Rectangle(-135.9,-216.9,263.6,216.7),new cjs.Rectangle(-139.3,-228.9,285.3,228.7),new cjs.Rectangle(-140.8,-240.7,314.9,240.5),new cjs.Rectangle(-140.5,-252.7,349.2,252.5),new cjs.Rectangle(-138.2,-264.7,379.2,265.2),new cjs.Rectangle(-143,-249.9,293.6,254.8),new cjs.Rectangle(-146.2,-234.9,304.2,234.7),new cjs.Rectangle(-147.3,-220,311,219.8),new cjs.Rectangle(-146.2,-204.7,313.7,204.5),new cjs.Rectangle(-117.7,-189.9,267,189.7),new cjs.Rectangle(-118.3,-167.8,269,196.2),new cjs.Rectangle(-118.8,-164.8,271.2,194.7),new cjs.Rectangle(-119.4,-161.9,273.2,193.3),new cjs.Rectangle(-120,-158.9,275.1,191.8),new cjs.Rectangle(-120.5,-160.7,276.9,194.5),new cjs.Rectangle(-121,-162.3,264.1,197.2),new cjs.Rectangle(-121,-162.3,264.1,198.1),new cjs.Rectangle(-121,-162.3,264.1,199),new cjs.Rectangle(-121,-162.3,264.1,200),new cjs.Rectangle(-121,-162.3,264.1,200.8)];
 
 
 (lib.Menu = function(mode,startPosition,loop) {
@@ -3519,7 +3598,8 @@ p.nominalBounds = new cjs.Rectangle(-130.9,-211.3,254.2,211.1);
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_3},{t:this.startBtn}]}).wait(44));
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-15.5,58.2,821.8,552.6);
+p.nominalBounds = rect = new cjs.Rectangle(-15.5,58.2,821.8,552.6);
+p.frameBounds = [rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect=new cjs.Rectangle(-15.5,58.2,941.3,552.6), rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, rect, new cjs.Rectangle(-15.5,58.2,821.8,552.6)];
 
 })(lib = lib||{}, images = images||{}, createjs = createjs||{});
 var lib, images, createjs;

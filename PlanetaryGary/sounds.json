@@ -1,0 +1,14 @@
+{
+	"path": "assets/sounds/",
+	"manifest": [
+		{"src":"garywalk_chill.mp3", "id":"music"},
+		{"src":"BodySlam.mp3", "id":"BodySlam"},
+		{"src":"DirtSlide.mp3", "id":"DirtSlide"},
+		{"src":"EnemyHit.mp3", "id":"EnemyHit"},
+		{"src":"HitHard4.mp3", "id":"HitHard4"},
+		{"src":"LaserGunShot.mp3", "id":"LaserGunShot", "data":3},
+		{"src":"PressPlay.mp3", "id":"PressPlay"},
+		{"src":"TunnelCollision.mp3", "id":"TunnelCollision"},
+		{"src":"jump4.mp3", "id":"Jump"}
+	]
+}
