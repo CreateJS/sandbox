@@ -78,9 +78,9 @@ var p = Kaleidoscope.prototype = new createjs.DisplayObject();
 	 * cache() method should resolve this.
 	 * @property pad
 	 * @type Number
-	 * @default 0.6
+	 * @default 0
 	 **/
-	p.pad = 0.6;
+	p.pad = 0;
 	
 // private properties:
 	/**
