@@ -99,7 +99,7 @@
 		
 		// save off our bindings so we can remove listeners later:
 		window.document.addEventListener("keydown", this.keyListener = this.handleKeyDown.bind(this));
-		this.view.addEventListener("tick", this.tickListener = this.tick.bind(this));
+		this.tickListener = this.view.on("tick", this.tick, this);
 	}
 	
 	p.tick = function() {
@@ -210,7 +210,7 @@
 	
 	p.getSprite = function(label, speed, bounce, containerIndex, type) {
 		// returns a sprite, either from an object pool or instantiating a new one
-		var sprite = this.spritePool.length ? this.spritePool.pop() : new c.BitmapAnimation(this.spriteSheet);
+		var sprite = this.spritePool.length ? this.spritePool.pop() : new c.Sprite(this.spriteSheet);
 		sprite.set({speed:speed, type:type, dead:false});
 		sprite.gotoAndPlay(label);
 		if (bounce) { c.Tween.get(sprite, {loop:true}).to({scaleY:0.9}, 400).to({scaleY:1}, 400); }
@@ -239,7 +239,7 @@
 		
 		var h = this.stats.htmlElement.offsetHeight;
 		c.Tween.get(this.stats).to({y:this.hero.y-h-100*this.scale}, 2500, c.Ease.bounceOut).wait(6500).to({alpha:0},1000);
-		tween.addEventListener("change", this.alignStats.bind(this));
+		tween.on("change", this.alignStats, this);
 	}
 
 	p.alignStats = function(evt) {
@@ -258,14 +258,14 @@
 		// this pre-composites the game visuals, which makes the view transition smoother:
 		this.view.cache(0,0,this.width,this.height);
 		
-		// clean up:
-		this.view.removeEventListener("tick", this.tickListener);
+		// clean up listeners, and remove sprites:
+		this.view.off("tick", this.tickListener);
 		while (this.sprites.length) {
 			this.reclaimSprite(this.sprites.pop());
 		}
 		
 		// let GameInit know we are done (all DisplayObjects are event dispatchers):
-		this.dispatchEvent({type:"end"});
+		this.dispatchEvent("end");
 	}
 	
 	window.Game = Game;

@@ -32,14 +32,14 @@ var urlParams = {};
 		// set up the load queue, and listen for its events:
 		queue = new c.LoadQueue(true);
 		queue.installPlugin(c.Sound);
-		queue.addEventListener("progress", handleProgress.bind(this));
-		queue.addEventListener("fileload", handleFileLoad.bind(this));
-		queue.addEventListener("complete", handleComplete.bind(this));
+		queue.on("progress", handleProgress, this);
+		queue.on("fileload", handleFileLoad, this);
+		queue.on("complete", handleLoadComplete, this);
 		
 		// load our assets, starting with everything we need to render the spritesheet:
 		queue.loadManifest([
-				{src:"libs/tweenjs-0.4.0.min.js"},
-				{src:"libs/movieclip-0.6.0.min.js"},
+				{src:"libs/tweenjs-0.5.0.min.js"},
+				{src:"libs/movieclip-0.7.0.min.js"},
 				{src:"assets/PlanetaryGary_art.js", id: "art"},
 				{src:"js/Game.js"},
 				{src:"assets/sounds/garywalk_chill.mp3", id:"music"},
@@ -86,18 +86,18 @@ var urlParams = {};
 			.beginBitmapFill(progressBmp).drawRoundRect(-100,-10,value*200|0,20,10);
 	}
 	
-	function handleComplete() {
+	function handleLoadComplete() {
 		queue = null;
 		
 		// instantiate the menu view from the library (published from Flash),
 		// and get it set up correctly:
 		menu = new lib.Menu();
 		menu.stop();
-		menu.startBtn.addEventListener("click", startClicked, this);
+		menu.startBtn.on("click", startClicked, this);
 		
 		// this is dispatched from the timeline of the menu view when it hits the end of
 		// the start game animation:
-		menu.addEventListener("start", function() {
+		menu.on("start", function() {
 			menu.stop();
 			startGame();
 		});
@@ -110,10 +110,10 @@ var urlParams = {};
 		
 		// instantiate the Game logic (defined in Game.js)
 		window.game = game = new Game(gameView, canvasW, canvasH, scale);
-		game.addEventListener("end", endGame, this);
+		game.on("end", endGame, this);
 		
 		// set up our ticker:
-		c.Ticker.addEventListener("tick", stage);
+		c.Ticker.on("tick", stage);
 		c.Ticker.setFPS(20);
 	}
 	
@@ -148,7 +148,7 @@ var urlParams = {};
 	
 	function generateSpriteSheet() {
 		builder = new c.SpriteSheetBuilder();
-		builder.addEventListener("complete", handleBuildComplete, this);
+		builder.on("complete", handleBuildComplete, this);
 		
 		// this sets the global scale for all the sprites.
 		// it is multiplied against the individual scale.
@@ -183,7 +183,7 @@ var urlParams = {};
 			// the sprite sheet build is not complete yet, so show the progress bar:
 			swapView(progress);
 			var p = builder.progress;
-			builder.addEventListener("progress", function(evt) {
+			builder.on("progress", function(evt) {
 				drawProgress((evt.target.progress-p)/(1-p));
 			});
 			// increase the CPU utilization to ~80% to speed things up:
@@ -222,12 +222,7 @@ var urlParams = {};
 	}
 
 	function setMusicVolume(volume, time) {
-		// we need a property to tween, so we'll add one onto the music object:
-		music.__volume = music.getVolume();
-		var tween = c.Tween.get(music, {override:true}).to({__volume:volume}, time);
-		
-		// when the value changes, we'll update the volume using setVolume:
-		tween.addEventListener("change", function(evt) { music.setVolume(music.__volume); });
+		c.Tween.get(music, {override:true}).to({volume:volume}, time);
 	}
 	
 	init();
