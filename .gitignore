@@ -1,2 +1,40 @@
-*.DS_Store
+#-----------------------------
+# SYSTEM
+#-----------------------------
+.DS_Store
+
+#-----------------------------
+# INVALID FILES
+# (for cross OS compatibility)
+#-----------------------------
+*[\<\>\:\"\/\\\|\?\*]*
+
+#-----------------------------
+# WORKSPACE
+#-----------------------------
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+
+#-----------------------------
+# SETUP
+#-----------------------------
+node_modules/
+
+
+#-----------------------------
+# BUILD/DEBUGGING
+#-----------------------------
+.sass-cache/
+deploy/
 *TMP*
+
+#-----------------------------
+# AUTO-GENERATED
+#-----------------------------
+/src/index.html
+/src/styles/css/project.css
+*.compiled.js
+/src/scripts/*.min.js
+config.codekit
