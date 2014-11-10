@@ -99,7 +99,7 @@
 	
 	p.tick = function(evt) {
 		fps = this.spriteSheet.framerate;
-		var t =  evt.params[0].delta / (1000/fps);
+		var t =  evt[0].delta / (1000/fps);
 		this.updateShot(t);
 		this.updateTerrain(true, t);
 		if (!this.dead) {
