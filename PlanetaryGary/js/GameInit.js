@@ -48,8 +48,8 @@ var urlParams = {};
 		
 		// load our assets, starting with everything we need to render the spritesheet:
 		queue.loadManifest([
-				{src:"libs/tweenjs-0.5.1.min.js"},
-				{src:"libs/movieclip-0.7.0.min.js"},
+				{src:"libs/tweenjs-NEXT.combined.js"},
+				{src:"libs/movieclip-NEXT.combined.js"},
 				{src:"assets/PlanetaryGary_art.js", id: "art"},
 				{src:"libs/SpriteContainer.js"},
 				{src:"libs/SpriteStage.js"},
@@ -76,8 +76,8 @@ var urlParams = {};
 	
 	function setupMusicFX(soundInstance) {
 		if (!soundInstance.gainNode) { return; }
-		delayNode = c.WebAudioPlugin.context.createDelay();
-		delayNode.connect(c.WebAudioPlugin.dynamicsCompressorNode);
+		delayNode = c.Sound.activePlugin.context.createDelay();
+		delayNode.connect(c.Sound.activePlugin.dynamicsCompressorNode);
 		delayNode.delayTime.value = 0;
 		soundInstance.gainNode.connect(delayNode);
 	}
