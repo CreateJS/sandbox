@@ -20,31 +20,29 @@
 			{speed:4, minX:100, maxX:800, minY:h-120*s, maxY:h, bounce:false, labels:["frontDeco0","frontDeco1"]},
 			{speed:4, minX:800, maxX:1800, minY:h-30*s, maxY:h-30*s, bounce:false, type:1, x:2000, labels:["trap0", "trap1", "trap2", "enemy0Idle", "enemy1Idle"]},
 		];
+
+		this.spriteSheet = null;
+		this.sprites = [];
+		this.speed = 0;
+		this.terrainContainers = [];
+		this.shot = null;
+		this.hero = null;
+		this.spritePool = [];
+		this.dead = false;
+		this.keyListener = null;
+		this.tickListener = null;
+		this.shotDelay = null;
+		this.stats = null;
+		this.kills = null;
+		this.distance = null;
+		this.hazards = null;
+		this.score = 0;
+
+		this._inited = false;
 	}
-	var p = Game.prototype;
-	c.EventDispatcher.initialize(p);
-	
-	p.view;
-	p.width;
-	p.height;
-	p.spriteSheet;
-	p.sprites;
-	p.speed;
-	p.terrainContainers;
-	p.shot;
-	p.hero;
-	p.spritePool;
-	p.dead;
-	p.keyListener;
-	p.tickListener;
-	p.shotDelay;
-	p.stats;
-	p.kills;
-	p.distance;
-	p.hazards;
-	p.score;
-	
-	p._inited;
+
+	var p = c.extend(Game, c.EventDispatcher);
+
 	
 	p.init = function(spriteSheet) {
 		var i,l, s = this.scale;
@@ -52,9 +50,6 @@
 		// the first time a game starts, we need to set up a few things:
 		if (!this._inited) {
 			this._inited = true;
-			this.spritePool = [];
-			this.sprites = [];
-			this.terrainContainers = [];
 			
 			var bg = new c.Shape();
 			bg.graphics
@@ -273,5 +268,5 @@
 		this.dispatchEvent("end");
 	}
 	
-	window.Game = Game;
+	window.Game = createjs.promote(Game, "EventDispatcher");
 })();
