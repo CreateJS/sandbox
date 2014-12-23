@@ -15,7 +15,7 @@
             queue = new createjs.LoadQueue(false);
             queue.installPlugin(createjs.Sound);
             queue.addEventListener("complete", handleComplete);
-            queue.loadManifest([{id:"daisy", src:"assets/daisy.png"}, {id:"sound", src:"assets/pop.mp3"}]);
+            queue.loadManifest([{"daisy":"assets/daisy.png"}, {"sound":"assets/pop.mp3"}]);
 
         }
 
