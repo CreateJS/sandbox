@@ -3,6 +3,8 @@ CreateJS Banner Ad Using Flash CC
 
 Interactive HTML5 banner ad created entirely in Adobe Flash Pro CC.
 
+![ScreenShot](https://raw.github.com/CreateJS/sandbox/master/BannerAd/README_1.jpg)
+
 **[View this example online.](http://sandbox.createjs.com/ToolkitBannerAd/garyad.html)**
 
 The total "over the wire" (gzipped) size for this banner ad is only 66kb (w/25kb of audio), excluding the CDN hosted CreateJS libraries.
