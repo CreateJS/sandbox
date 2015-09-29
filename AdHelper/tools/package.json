@@ -1,0 +1,17 @@
+{
+  "name": "banner",
+  "version": "0.8.0",
+  "description": "CreateJS banner and AdHelper example",
+  "main": "AdHelper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Grant Skinner",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-yuidoc": "^0.1.2"
+  }
+}
