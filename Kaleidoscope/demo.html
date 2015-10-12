@@ -27,9 +27,9 @@
 	(function init() {
 		q = new c.LoadQueue(false);
 		q.loadFile(imagePath);
-		q.addEventListener("complete", run);
+		q.on("complete", run);
 	})();
-	
+
 	function run(evt) {
 		stage = new c.Stage("demo");
 		var w = stage.canvas.width;
@@ -53,7 +53,7 @@
 		kal.x = w/2;
 		kal.y = h/2;
 
-		c.Ticker.addEventListener("tick", tick);
+		c.Ticker.on("tick", tick);
 	}
 
 	function tick() {
