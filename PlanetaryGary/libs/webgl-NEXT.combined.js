@@ -1,5 +1,5 @@
-/*
-* SpriteStage
+/*!
+* EaselJS
 * Visit http://createjs.com/ for documentation, updates and examples.
 *
 * Copyright (c) 2010 gskinner.com, inc.
@@ -26,11 +26,172 @@
 * OTHER DEALINGS IN THE SOFTWARE.
 */
 
-/**
- * @module EaselJS
- */
 
-// namespace:
+//##############################################################################
+// SpriteContainer.js
+//##############################################################################
+
+this.createjs = this.createjs||{};
+
+(function() {
+	"use strict";
+
+
+	/**
+	 * A SpriteContainer is a nestable display list that enables aggressively optimized rendering of bitmap content.
+	 * In order to accomplish these optimizations, SpriteContainer enforces a few restrictions on its content.
+	 *
+	 * Restrictions:
+	 *     - only Sprite, SpriteContainer, BitmapText and DOMElement are allowed to be added as children.
+	 *     - a spriteSheet MUST be either be passed into the constructor or defined on the first child added.
+	 *     - all children (with the exception of DOMElement) MUST use the same spriteSheet.
+	 *
+	 * <h4>Example</h4>
+	 *
+	 *      var data = {
+	 *          images: ["sprites.jpg"],
+	 *          frames: {width:50, height:50},
+	 *          animations: {run:[0,4], jump:[5,8,"run"]}
+	 *      };
+	 *      var spriteSheet = new createjs.SpriteSheet(data);
+	 *      var container = new createjs.SpriteContainer(spriteSheet);
+	 *      container.addChild(spriteInstance, spriteInstance2);
+	 *      container.x = 100;
+	 *
+	 * <strong>Note:</strong> SpriteContainer is not included in the minified version of EaselJS.
+	 *
+	 * @class SpriteContainer
+	 * @extends Container
+	 * @constructor
+	 * @param {SpriteSheet} [spriteSheet] The spriteSheet to use for this SpriteContainer and its children.
+	 **/
+	function SpriteContainer(spriteSheet) {
+		this.Container_constructor();
+		
+		
+	// public properties:
+		/**
+		 * The SpriteSheet that this container enforces use of.
+		 * @property spriteSheet
+		 * @type {SpriteSheet}
+		 * @readonly
+		 **/
+		this.spriteSheet = spriteSheet;
+	}
+	var p = createjs.extend(SpriteContainer, createjs.Container);
+
+	/**
+	 * <strong>REMOVED</strong>. Removed in favor of using `MySuperClass_constructor`.
+	 * See {{#crossLink "Utility Methods/extend"}}{{/crossLink}} and {{#crossLink "Utility Methods/promote"}}{{/crossLink}}
+	 * for details.
+	 *
+	 * There is an inheritance tutorial distributed with EaselJS in /tutorials/Inheritance.
+	 *
+	 * @method initialize
+	 * @protected
+	 * @deprecated
+	 */
+	// p.initialize = function() {}; // searchable for devs wondering where it is.
+	
+
+// public methods:
+	/**
+	 * Adds a child to the top of the display list.
+	 * Only children of type SpriteContainer, Sprite, Bitmap, BitmapText, or DOMElement are allowed.
+	 * The child must have the same spritesheet as this container (unless it's a DOMElement).
+	 * If a spritesheet hasn't been defined, this container uses this child's spritesheet.
+	 *
+	 * <h4>Example</h4>
+	 *      container.addChild(bitmapInstance);
+	 *
+	 *  You can also add multiple children at once:
+	 *
+	 *      container.addChild(bitmapInstance, shapeInstance, textInstance);
+	 *
+	 * @method addChild
+	 * @param {DisplayObject} child The display object to add.
+	 * @return {DisplayObject} The child that was added, or the last child if multiple children were added.
+	 **/
+	p.addChild = function(child) {
+		if (child == null) { return child; }
+		if (arguments.length > 1) {
+			return this.addChildAt.apply(this, Array.prototype.slice.call(arguments).concat([this.children.length]));
+		} else {
+			return this.addChildAt(child, this.children.length);
+		}
+	};
+
+	/**
+	 * Adds a child to the display list at the specified index, bumping children at equal or greater indexes up one, and
+	 * setting its parent to this Container.
+	 * Only children of type SpriteContainer, Sprite, Bitmap, BitmapText, or DOMElement are allowed.
+	 * The child must have the same spritesheet as this container (unless it's a DOMElement).
+	 * If a spritesheet hasn't been defined, this container uses this child's spritesheet.
+	 *
+	 * <h4>Example</h4>
+	 *      addChildAt(child1, index);
+	 *
+	 * You can also add multiple children, such as:
+	 *
+	 *      addChildAt(child1, child2, ..., index);
+	 *
+	 * The index must be between 0 and numChildren. For example, to add myShape under otherShape in the display list,
+	 * you could use:
+	 *
+	 *      container.addChildAt(myShape, container.getChildIndex(otherShape));
+	 *
+	 * This would also bump otherShape's index up by one. Fails silently if the index is out of range.
+	 *
+	 * @method addChildAt
+	 * @param {DisplayObject} child The display object to add.
+	 * @param {Number} index The index to add the child at.
+	 * @return {DisplayObject} Returns the last child that was added, or the last child if multiple children were added.
+	 **/
+	p.addChildAt = function(child, index) {
+		var l = arguments.length;
+		var indx = arguments[l-1]; // can't use the same name as the index param or it replaces arguments[1]
+		if (indx < 0 || indx > this.children.length) { return arguments[l-2]; }
+		if (l > 2) {
+			for (var i=0; i<l-1; i++) { this.addChildAt(arguments[i], indx+i); }
+			return arguments[l-2];
+		}
+		if (child._spritestage_compatibility >= 1) {
+			// The child is compatible with SpriteStage/SpriteContainer.
+		} else {
+			console && console.log("Error: You can only add children of type SpriteContainer, Sprite, BitmapText, or DOMElement [" + child.toString() + "]");
+			return child;
+		}
+		if (child._spritestage_compatibility <= 4) {
+			var spriteSheet = child.spriteSheet;
+			if ((!spriteSheet || !spriteSheet._images || spriteSheet._images.length > 1) || (this.spriteSheet && this.spriteSheet !== spriteSheet)) {
+				console && console.log("Error: A child's spriteSheet must be equal to its parent spriteSheet and only use one image. [" + child.toString() + "]");
+				return child;
+			}
+			this.spriteSheet = spriteSheet;
+		}
+		if (child.parent) { child.parent.removeChild(child); }
+		child.parent = this;
+		this.children.splice(index, 0, child);
+		return child;
+	};
+
+	/**
+	 * Returns a string representation of this object.
+	 * @method toString
+	 * @return {String} a string representation of the instance.
+	 **/
+	p.toString = function() {
+		return "[SpriteContainer (name="+  this.name +")]";
+	};
+
+
+	createjs.SpriteContainer = createjs.promote(SpriteContainer, "Container");
+}());
+
+//##############################################################################
+// SpriteStage.js
+//##############################################################################
+
 this.createjs = this.createjs||{};
 
 (function() {
@@ -265,6 +426,9 @@ this.createjs = this.createjs||{};
 	}
 	var p = createjs.extend(SpriteStage, createjs.Stage);
 
+	// TODO: deprecated
+	// p.initialize = function() {}; // searchable for devs wondering where it is. REMOVED. See docs for details.
+
 
 // constants:
 	/**
@@ -426,42 +590,13 @@ this.createjs = this.createjs||{};
 		if (child.parent) { child.parent.removeChild(child); }
 		child.parent = this;
 		this.children.splice(index, 0, child);
-		this._setUpKidTexture(this._webGLContext, child);
 		return child;
 	};
 
-	/**
-	 * Each time the update method is called, the stage will tick all descendants (see: {{#crossLink "DisplayObject/tick"}}{{/crossLink}})
-	 * and then render the display list to the canvas using WebGL. If WebGL is not supported in the browser, it will default to a 2D context.
-	 * 
-	 * Any parameters passed to `update()` will be passed on to any
-	 * {{#crossLink "DisplayObject/tick:event"}}{{/crossLink}} event handlers.
-	 *
-	 * Some time-based features in EaselJS (for example {{#crossLink "Sprite/framerate"}}{{/crossLink}} require that
-	 * a tick event object (or equivalent) be passed as the first parameter to update(). For example:
-	 *
-	 *      Ticker.addEventListener("tick", handleTick);
-	 *      function handleTick(evtObj) {
-	 *          // do some work here, then update the stage, passing through the event object:
-	 *          myStage.update(evtObj);
-	 *      }
-	 *
-	 * @method update
-	 * @param {*} [params]* Params to include when ticking descendants. The first param should usually be a tick event.
-	 **/
-	p.update = function(params) {
+	/** docced in super class **/
+	p.update = function(props) {
 		if (!this.canvas) { return; }
-		if (this.tickOnUpdate) {
-			this.dispatchEvent("tickstart");  // TODO: make cancellable?
-
-			var args = arguments.length ? Array.prototype.slice.call(arguments,0) : null;
-			var evt = args&&args[0];
-			var props = evt&&(evt.delta != null) ? {delta:evt.delta, paused:evt.paused, time:evt.time, runTime:evt.runTime } : {};
-			props.params = args;
-
-			this._tick(props);
-			this.dispatchEvent("tickend");
-		}
+		if (this.tickOnUpdate) { this.tick(props); }
 		this.dispatchEvent("drawstart"); // TODO: make cancellable?
 		if (this.autoClear) { this.clear(); }
 		var ctx = this._setWebGLContext();
@@ -512,12 +647,6 @@ this.createjs = this.createjs||{};
 	p.draw = function(ctx, ignoreCache) {
 		if (typeof WebGLRenderingContext !== 'undefined' && (ctx === this._webGLContext || ctx instanceof WebGLRenderingContext)) {		
 			this._drawWebGLKids(this.children, ctx);
-
-			// If there is a remaining texture, draw it:
-			if (this._drawTexture) {
-				this._drawToGPU(ctx);
-			}
-
 			return true;
 		} else {
 			return this.Stage_draw(ctx, ignoreCache);
@@ -548,7 +677,7 @@ this.createjs = this.createjs||{};
 	/**
 	 * Clears an image's texture to free it up for garbage collection.
 	 * @method clearImageTexture
-	 * @param  {Image} image
+	 * @param  {HTMLImageElement} image
 	 **/
 	p.clearImageTexture = function(image) {
 		image.__easeljs_texture = null;
@@ -804,30 +933,19 @@ this.createjs = this.createjs||{};
 		ctx.bindBuffer(ctx.ELEMENT_ARRAY_BUFFER, this._indicesBuffer);
 		ctx.bufferData(ctx.ELEMENT_ARRAY_BUFFER, this._indices, ctx.STATIC_DRAW);
 	};
-
+	
 	/**
-	 * Sets up a kid's WebGL texture.
-	 * @method _setUpKidTexture
+	 * Sets up an image's WebGL texture.
+	 * @method _setupImageTexture
 	 * @param {WebGLRenderingContext} ctx The canvas WebGL context object to draw into.
-	 * @param {Object} kid                The list of kids to draw.
+	 * @param {Object} image
 	 * @return {WebGLTexture}
 	 * @protected
 	 **/
-	p._setUpKidTexture = function (ctx, kid) {
-		if (!ctx) { return null; }
-
-		var image,
-			texture = null;
-
-		if (kid._spritestage_compatibility === 4) {
-			image = kid.image;
-		} else if (kid._spritestage_compatibility <= 3 && kid.spriteSheet && kid.spriteSheet._images) {
-			image = kid.spriteSheet._images[0];
-		}
-
-		if (image) {
+	p._setupImageTexture = function(ctx, image) {
+		if (image && (image.naturalWidth || image.getContext || image.readyState >= 2)) {
 			// Create and use a new texture for this image if it doesn't already have one:
-			texture = image.__easeljs_texture;
+			var texture = image.__easeljs_texture;
 			if (!texture) {
 				texture = image.__easeljs_texture = ctx.createTexture();
 				ctx.bindTexture(ctx.TEXTURE_2D, texture);
@@ -837,9 +955,8 @@ this.createjs = this.createjs||{};
 				ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_S, ctx.CLAMP_TO_EDGE);
 				ctx.texParameteri(ctx.TEXTURE_2D, ctx.TEXTURE_WRAP_T, ctx.CLAMP_TO_EDGE);
 			}
+			return texture;
 		}
-
-		return texture;
 	};
 
 	/**
@@ -863,11 +980,17 @@ this.createjs = this.createjs||{};
 		for (var i = 0, l = kids.length; i < l; i++) {
 			kid = kids[i];
 			if (!kid.isVisible()) { continue; }
+			
+			// Get the texture for this display branch:
+			var image = kid.image || (kid.spriteSheet && kid.spriteSheet._images[0]);
+			if (!image) { continue; } // kid that doesn't have image (ex. DOMElement).
+			var texture = image.__easeljs_texture;
+			if (!texture && !(texture = this._setupImageTexture(ctx, image))) { continue; } // no texture available (ex. may not be loaded yet).
+			
 			mtx = kid._props.matrix;
 
 			// Get the kid's global matrix (relative to the stage):
-			mtx = (parentMVMatrix ? mtx.copy(parentMVMatrix) : mtx.identity())
-				.appendTransform(kid.x, kid.y, kid.scaleX, kid.scaleY, kid.rotation, kid.skewX, kid.skewY, kid.regX, kid.regY);
+			mtx = (parentMVMatrix ? mtx.copy(parentMVMatrix) : mtx.identity()).appendTransform(kid.x, kid.y, kid.scaleX, kid.scaleY, kid.rotation, kid.skewX, kid.skewY, kid.regX, kid.regY);
 
 			// Set default texture coordinates:
 			var uStart = 0, uEnd = 1,
@@ -875,8 +998,6 @@ this.createjs = this.createjs||{};
 
 			// Define the untransformed bounding box sides and get the kid's image to use for textures:
 			if (kid._spritestage_compatibility === 4) {
-				image = kid.image;
-
 				leftSide = 0;
 				topSide = 0;
 				rightSide = image.width;
@@ -884,8 +1005,6 @@ this.createjs = this.createjs||{};
 			} else if (kid._spritestage_compatibility === 2) {
 				var frame = kid.spriteSheet.getFrame(kid.currentFrame),
 					rect = frame.rect;
-
-				image = frame.image;
 
 				leftSide = -frame.regX;
 				topSide = -frame.regY;
@@ -907,24 +1026,10 @@ this.createjs = this.createjs||{};
 			}
 
 			// Detect if this kid is a new display branch:
-			if (!parentMVMatrix && kid._spritestage_compatibility <= 4) {
-				// Get the texture for this display branch:
-				var texture = (image || kid.spriteSheet._images[0]).__easeljs_texture;
-
-				// Only use a new texture in the current draw call:
-				if (texture !== this._drawTexture) {
-
-					// Draw to the GPU if a texture is already in use:
-					if (this._drawTexture) {
-						this._drawToGPU(ctx);
-					}
-
-					this._drawTexture = texture;
-
-					ctx.activeTexture(ctx.TEXTURE0);
-					ctx.bindTexture(ctx.TEXTURE_2D, texture);
-					ctx.uniform1i(this._shaderProgram.sampler0uniform, 0);
-				}
+			if (!parentMVMatrix && kid._spritestage_compatibility <= 4 && texture !== this._drawTexture) {
+				// Draw to the GPU if a texture is already in use:
+				this._drawToGPU(ctx);
+				this._drawTexture = texture;
 			}
 
 			if (image !== null) {
@@ -965,12 +1070,7 @@ this.createjs = this.createjs||{};
 				// Draw to the GPU if the maximum number of boxes per a draw has been reached:
 				if (this._currentBoxIndex === maxBoxIndex) {
 					this._drawToGPU(ctx);
-
-					// Set the draw texture again:
-					this._drawTexture = image.__easeljs_texture;
-					ctx.activeTexture(ctx.TEXTURE0);
-					ctx.bindTexture(ctx.TEXTURE_2D, this._drawTexture);
-					ctx.uniform1i(this._shaderProgram.sampler0uniform, 0);
+					this._drawTexture = texture;
 
 					// If possible, increase the amount of boxes that can be used per draw call:
 					if (this._maxBoxesPointsPerDraw < maxIndexSize) {
@@ -986,6 +1086,9 @@ this.createjs = this.createjs||{};
 				maxBoxIndex = this._maxBoxesPerDraw - 1;
 			}
 		}
+		
+		// draw anything remaining, if this is the stage:
+		if (!parentMVMatrix) { this._drawToGPU(ctx); }
 	};
 
 	/**
@@ -995,7 +1098,12 @@ this.createjs = this.createjs||{};
 	 * @protected
 	 **/
 	p._drawToGPU = function(ctx) {
+		if (!this._drawTexture) { return; }
 		var numBoxes = this._currentBoxIndex + 1;
+		
+		ctx.activeTexture(ctx.TEXTURE0);
+		ctx.bindTexture(ctx.TEXTURE_2D, this._drawTexture);
+		ctx.uniform1i(this._shaderProgram.sampler0uniform, 0);
 
 		ctx.bindBuffer(ctx.ARRAY_BUFFER, this._verticesBuffer);
 

@@ -48,11 +48,8 @@ var urlParams = {};
 		
 		// load our assets, starting with everything we need to render the spritesheet:
 		queue.loadManifest([
-				{src:"libs/tweenjs-NEXT.combined.js"},
-				{src:"libs/movieclip-NEXT.combined.js"},
 				{src:"assets/PlanetaryGary_art.js", id: "art"},
-				{src:"libs/SpriteContainer.js"},
-				{src:"libs/SpriteStage.js"},
+				{src:"libs/webgl-NEXT.combined.js"},
 				{src:"js/Game.js"},
 				
 				{src:"sounds.json", type:c.LoadQueue.MANIFEST}
