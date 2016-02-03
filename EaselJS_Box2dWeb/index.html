@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <title>CreateJS export from Moose & Beaver Balls</title>
 
-<script src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
-<script src="http://code.createjs.com/movieclip-0.6.0.min.js"></script>
+<script src="http://code.createjs.com/createjs-2015.11.26.min.js"></script>
 <script src="libs/Box2dWeb-2.1.a.3.min.js"></script>
 <script src="assets/balls.js"></script>
 
@@ -123,7 +122,7 @@ function addBall(type, scale) {
 	var body = world.CreateBody(bodyDef);
 	body.CreateFixture(fixDef);
 	
-	var sprite = new c.BitmapAnimation(spriteSheet);
+	var sprite = new c.Sprite(spriteSheet);
 	sprite.gotoAndStop(def.frame);
 	sprite.scaleX = sprite.scaleY = scale;
 	if (type == 0) { sprite.addEventListener("mousedown", boom.bind(this)); }
