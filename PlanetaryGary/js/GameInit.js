@@ -49,16 +49,15 @@ var urlParams = {};
 		// load our assets, starting with everything we need to render the spritesheet:
 		queue.loadManifest([
 				{src:"assets/PlanetaryGary_art.js", id: "art"},
-				{src:"libs/webgl-NEXT.combined.js"},
 				{src:"js/Game.js"},
 				
-				{src:"sounds.json", type:c.LoadQueue.MANIFEST}
+				{src:"sounds.json", type:c.Types.MANIFEST}
 			], true);
 	}
 	
 	function handleFileLoad(evt) {
 		var o = evt.item;
-		if (o.id == "music" && o.type == c.LoadQueue.SOUND) {
+		if (o.id == "music" && o.type == c.Types.SOUND) {
 			// start the music playing as soon as it's loaded (no need to wait):
 			music = c.Sound.play("music", {loop:-1});
 			setMusicVolume(1, 10000);
@@ -120,7 +119,7 @@ var urlParams = {};
 		swapView(menu);
 		
 		// set up the game view:
-		gameStage = gameView = new c.SpriteStage("gameCanvas");
+		gameStage = gameView = new c.StageGL("gameCanvas");
 		gameStage.snapToPixelEnabled = true; // this prevents seams on abutted background tiles.
 		
 		// instantiate the Game logic (defined in Game.js)
@@ -128,7 +127,7 @@ var urlParams = {};
 		game.on("end", endGame, this);
 		
 		// set up our ticker's default FPS:
-		c.Ticker.setFPS(fps);
+		c.Ticker.framerate = fps;
 	}
 	
 	function swapView(view) {
@@ -258,5 +257,5 @@ var urlParams = {};
 
 // required for the timeline sounds:
 window.playSound = function(id, loop) {
-	createjs.Sound.play(id, createjs.Sound.INTERRUPT_EARLY, 0, 0, loop);
+	createjs.Sound.play(id, {interrypt: createjs.Sound.INTERRUPT_EARLY, loop: loop});
 }

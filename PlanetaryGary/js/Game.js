@@ -61,7 +61,7 @@
 			
 			var terrain = this.terrain;
 			for (i=0,l=terrain.length; i<l; i++) {
-				var o = this.view.addChild(new c.SpriteContainer(spriteSheet));
+				var o = this.view.addChild(new c.Container());
 				this.terrainContainers[i] = o;
 				terrain[i].x = s*terrain[i].x||0;
 			}
