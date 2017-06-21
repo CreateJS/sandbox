@@ -47,7 +47,7 @@
 			
 		// set up the fulcrum for interaction:
 		fulcrum.cursor = "pointer";
-		fulcrum.addEventListener("mousedown", handleFulcrumDown);
+		fulcrum.addEventListener("pressmove", handleFulcrumMove);
 		
 		// draw the default lever diagram:
 		drawLever();
@@ -75,20 +75,13 @@
 		var eh = (1-leverPosition)*effortH;
 		// draw the arrow, making sure to clear the old one first:
 		effort.graphics.clear()
-			.beginFill("#F00")
-			.drawPolyStar(0,-ew,ew,3,0,90)
-			.drawRect(-ew/2,-ew,ew,-eh);
+				.beginFill("#F00")
+				.drawPolyStar(0,-ew,ew,3,0,90)
+				.beginFill("#F00")
+				.drawRect(-ew/2,-ew,ew,-eh);
 		
 		// redraw the stage
 		stage.update();
-	}
-	
-	function handleFulcrumDown(evt) {
-		// prevent accidental selection when dragging the mouse:
-		evt.nativeEvent.preventDefault();
-		// add a listener for mouse move events to the event object:
-		// these will be broadcast until the next mouse up.
-		evt.addEventListener("mousemove", handleFulcrumMove);
 	}
 	
 	function handleFulcrumMove(evt) {
