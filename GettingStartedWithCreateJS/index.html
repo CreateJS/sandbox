@@ -15,25 +15,25 @@
             queue = new createjs.LoadQueue(false);
             queue.installPlugin(createjs.Sound);
             queue.addEventListener("complete", handleComplete);
-            queue.loadManifest([{"daisy":"assets/daisy.png"}, {"sound":"assets/pop.mp3"}]);
+            queue.loadManifest(["assets/daisy.png", "assets/pop.mp3"]);
 
         }
 
         function handleComplete(event) {
             //Create interactive object, using EaselJS Drawing API
             var ball = new createjs.Shape();
-            ball.addEventListener("click", handleClick);
+            ball.on("click", handleClick);
             ball.graphics.beginFill("#000000").drawCircle(0, 0, 50);
             ball.x = 50;
             ball.y = 200;
+            stage.addChild(ball);
 
             //Creates animation of display object
             createjs.Tween.get(ball, {loop:true}).to({x:450}, 3000).to({x:50}, 3000);
 
             //Listening for a tick event that will update the stage
-            createjs.Ticker.addEventListener("tick", tick);
+            createjs.Ticker.on("tick", tick);
 
-            stage.addChild(ball);
         }
 
         //Handle mouse interaction
@@ -50,7 +50,7 @@
 
         //Need when having animation.
         function tick(event) {
-            stage.update();
+            stage.update(event);
         }
 
     </script>
