@@ -2,7 +2,7 @@
 
 (function() {
 	var c = createjs;
-	
+
 	var Game = function(view, width, height, scale) {
 		this.view = view; // the SpriteStage instance to draw into
 		this.view.mouseChildren = false; // nothing in the game view requires mouse interaction
@@ -10,15 +10,24 @@
 		var h = this.height = height;
 		var s = this.scale = scale;
 		var b = 170*s;
-		
+
+		//SD:need to store terrian limits for stage resizes
+		this.terrainLimits = {
+			"clouds":{maxY:350, minY:0},
+			"bulidings":{minY:300, maxY:250},
+			"bgMids":{minY:168, maxY:168},
+			"midDecos":{minY:290, maxY:200},
+			"fontDecos":{minY:120, maxY:null},
+			"enemies":{minY:30, maxY:30}
+		};
 		// define the different layers of terrain, and the sprite labels that can be displayed on them:
 		this.terrain = [
-			{speed:1, minX:50, maxX:400, minY:0, maxY:h-350*s, bounce:false, labels:["cloud0","cloud1","cloud2"]},
-			{speed:2, minX:100, maxX:1000, minY:h-300*s, maxY:h-250*s, bounce:true, labels:["building0","building1","building2"]},
-			{speed:3, minX:809-2, maxX:809-2, minY:h-168*s, maxY:h-168*s, bounce:false, labels:["bgMid0","bgMid1","bgMid2"]},
-			{speed:3, minX:100, maxX:500, minY:h-290*s, maxY:h-200*s, bounce:true, labels:["midDeco0","midDeco1","midDeco2","midDeco3"]},
-			{speed:4, minX:100, maxX:800, minY:h-120*s, maxY:h, bounce:false, labels:["frontDeco0","frontDeco1"]},
-			{speed:4, minX:800, maxX:1800, minY:h-30*s, maxY:h-30*s, bounce:false, type:1, x:2000, labels:["trap0", "trap1", "trap2", "enemy0Idle", "enemy1Idle"]},
+			{speed:1, minX:50, maxX:400, minY:0, maxY:h-350*s, bounce:false, labels:["cloud0","cloud1","cloud2"], terrainType:"clouds"},
+			{speed:2, minX:100, maxX:1000, minY:h-300*s, maxY:h-250*s, bounce:true, labels:["building0","building1","building2"], terrainType:"bulidings"},
+			{speed:3, minX:809-2, maxX:809-2, minY:h-168*s, maxY:h-168*s, bounce:false, labels:["bgMid0","bgMid1","bgMid2"], terrainType:"bgMids"},
+			{speed:3, minX:100, maxX:500, minY:h-290*s, maxY:h-200*s, bounce:true, labels:["midDeco0","midDeco1","midDeco2","midDeco3"], terrainType:"midDecos"},
+			{speed:4, minX:100, maxX:800, minY:h-120*s, maxY:h, bounce:false, labels:["frontDeco0","frontDeco1"], terrainType:"fontDecos"},
+			{speed:4, minX:800, maxX:1800, minY:h-30*s, maxY:h-30*s, bounce:false, type:1, x:2000, labels:["trap0", "trap1", "trap2", "enemy0Idle", "enemy1Idle"], terrainType:"enemies"}
 		];
 
 		this.spriteSheet = null;
@@ -43,60 +52,92 @@
 
 	var p = c.extend(Game, c.EventDispatcher);
 
-	
 	p.init = function(spriteSheet) {
 		var i,l, s = this.scale;
-		
+
 		// the first time a game starts, we need to set up a few things:
 		if (!this._inited) {
 			this._inited = true;
-			
-			var bg = new c.Shape();
+
+			bg = new c.Shape();
 			bg.graphics
 				.beginLinearGradientFill(["#C1F0C7", "#F0F9D1"], [0,1], 0,0, 0,this.height-170*s)
 				.drawRect(0,0,this.width,this.height-170*s)
 				.beginFill("#f55351").drawRect(0,this.height-170*s,this.width,170*s);
 			bg.cache(0,0,this.width,this.height);
-			this.view.addChild(new c.Bitmap(bg.cacheCanvas));
-			
+			this.view.addChild(bg);
+
 			var terrain = this.terrain;
 			for (i=0,l=terrain.length; i<l; i++) {
 				var o = this.view.addChild(new c.Container());
 				this.terrainContainers[i] = o;
 				terrain[i].x = s*terrain[i].x||0;
 			}
-			
+
 			// wrap the "gameStats" div in a DOMElement, so we can treat it as a DisplayObject:
 			this.stats = this.view.addChild(new c.DOMElement("gameStats"));
 		}
-		
+
 		// animate in the stats window:
 		this.stats.set({alpha:0, x:200, y:40});
 		c.Tween.get(this.stats).wait(1000).to({x:40, alpha:1}, 1000, c.Ease.easeOut);
-		
+
 		this.spriteSheet = spriteSheet;
 		this.dead = false;
 		this.score = this.kills = this.distance = this.hazards = 0;
-		
+
 		this.hero = this.getSprite("run", 4, false, null, 0);
-		this.hero.set({x:-this.hero.getBounds().width, y:this.height-80*s, right:1000})
+		this.hero.set({x:-this.hero.getBounds().width, y:this.height-80*s, right:1000});
 		c.Tween.get(this.hero).wait(1000).to({x:160*s},3000,c.Ease.get(1));
-		
+
 		this.shot = this.getSprite("bulletIdle", 0, false, null, 0).set({visible:false, y:this.hero.y-130*s});
 		this.shot.stop();
-		
+
 		this.view.addChild(this.shot,this.hero);
-		
+
 		// pre-generate a screen of terrain:
 		this.speed = 200*s;
 		for (i=0; i<this.width*1.1/this.speed; i++) { this.updateTerrain(); }
 		this.speed = 5;
-		
+
 		// save off our bindings so we can remove listeners later:
 		window.document.addEventListener("keydown", this.keyListener = this.handleKeyDown.bind(this));
 		this.tickListener = this.view.on("tick", this.tick, this);
-	}
-	
+	};
+
+	p.updateResize = function (w, h) {
+		//SD:update internal width and height
+		this.width = w;
+		this.height = h;
+
+		//SD:update bg image diamentions
+		bg.graphics.clear()
+			.beginLinearGradientFill(["#C1F0C7", "#F0F9D1"], [0,1], 0,0, 0,this.height-170*this.scale)
+			.drawRect(0,0,this.width,this.height-170*this.scale)
+			.beginFill("#f55351").drawRect(0,this.height-170*this.scale,this.width,170*this.scale);
+		bg.cache(0,0,this.width,this.height);
+
+		//SD:update terrain elements bounds and adjust positions of sprites
+		var l = this.terrain.length;
+		for(var i=0;i<l;i++) {
+			var item = this.terrain[i];
+			var terrainType = item.terrainType;
+			var values = this.terrainLimits[terrainType];
+			item.minY = (values.minY == 0) ? 0 : this.height - values.minY*this.scale;
+			item.maxY = (values.maxY == 0) ? 0 : this.height - values.maxY*this.scale;
+			if (values.maxY == null) { item.maxY = this.height; }
+			if (values.minY == null) { item.minY = this.height; }
+			var terrainContainer = this.terrainContainers[i];
+			var num =  terrainContainer.numChildren;
+			for(var j=0;j<num;j++) {
+				var sprite = terrainContainer.getChildAt(j);
+				sprite.y = item.minY+Math.random()*(item.maxY-item.minY)|0;
+			}
+		}
+		this.hero.y = this.height-80*this.scale;
+		this.shot.y = this.hero.y-130*this.scale;
+	};
+
 	p.tick = function(evt) {
 		fps = this.spriteSheet.framerate;
 		var t =  evt.delta / (1000/fps);
@@ -108,7 +149,7 @@
 			this.updateStats();
 		}
 	}
-	
+
 	p.handleKeyDown = function(evt) {
 		if (this.dead || this.hero.currentAnimation != "run") { return; }
 		if (evt.keyCode == 38) {
@@ -123,7 +164,7 @@
 			c.Sound.play("LaserGunShot");
 		}
 	}
-	
+
 	p.updateShot = function(t) {
 		if (this.shotDelay && ((this.shotDelay -= t) <= 0)) {
 			this.shot.visible = true;
@@ -131,7 +172,7 @@
 			this.shot.x = this.hero.x + 140;
 			this.shotDelay = null;
 		} else if (!this.shot.visible) { return; }
-		
+
 		this.shot.x += t*50*this.scale;
 		if (this.shot.x > this.width-this.shot.getBounds().x) {
 			// left the screen.
@@ -139,7 +180,7 @@
 			this.shot.visible = false;
 		}
 	}
-	
+
 	p.updateTerrain = function(enemies, t) {
 		var i,l;
 		// move existing terrain elements:
@@ -152,7 +193,7 @@
 			if (!this.dead && sprite.x < bounds.x-bounds.width) { this.reclaimSprite(sprite, i); }
 			else if (sprite.type) { this.processSprite(sprite); }
 		}
-		
+
 		// generate new terrain:
 		var terrain = this.terrain;
 		for (i=0,l=terrain.length; i<l; i++) {
@@ -169,7 +210,7 @@
 			o.x += this.scale*(o.minX+Math.random()*range);
 		}
 	}
-	
+
 	p.processSprite = function(sprite) {
 		// checks for interactions between sprites.
 		if (!sprite.trap && this.shot.visible && !sprite.dead && Math.abs(this.shot.x-sprite.x) < 50*this.scale) {
@@ -193,7 +234,7 @@
 			sprite.jumped = true;
 		}
 	}
-	
+
 	p.initSprite = function(sprite, label) {
 		// this uses some fairly specific logic, which could be made more generic for a
 		// more robust game, but works for this demo:
@@ -205,7 +246,7 @@
 		sprite.dead = sprite.jumped = false;
 		if (!sprite.trap) { sprite.y -= 80*this.scale; }
 	}
-	
+
 	p.getSprite = function(label, speed, bounce, containerIndex, type) {
 		// returns a sprite, either from an object pool or instantiating a new one
 		var sprite = this.spritePool.length ? this.spritePool.pop() : new c.Sprite(this.spriteSheet);
@@ -216,7 +257,7 @@
 		this.sprites.push(sprite);
 		return sprite;
 	}
-	
+
 	p.reclaimSprite = function(sprite, index) {
 		// deactivates the sprite, and returns it to the object pool for future reuse.
 		c.Tween.removeTweens(sprite);
@@ -227,7 +268,7 @@
 		if (index != -1) { this.sprites.splice(index, 1); }
 		this.spritePool.push(sprite);
 	}
-	
+
 	p.die = function(label) {
 		this.hero.gotoAndPlay(label);
 		this.hero.type = null;
@@ -237,7 +278,7 @@
 			.to({speed:-this.speed*0.5}, 3000, c.Ease.get(-0.6))
 			.to({speed:0},4000, c.Ease.get(-0.5)).wait(1000)
 			.call(this.endGame, [], this);
-		
+
 		var h = this.stats.htmlElement.offsetHeight;
 		c.Tween.get(this.stats)
 			.to({y:this.hero.y-h-100*this.scale}, 2500, c.Ease.bounceOut)
@@ -256,17 +297,17 @@
 		hazardsFld.innerText = String(this.hazards);
 		scoreFld.innerText = String(this.kills*100+this.hazards*10000+Math.round(this.distance/10)*100);
 	}
-	
+
 	p.endGame = function() {
 		// clean up listeners, and remove sprites:
 		this.view.off("tick", this.tickListener);
 		while (this.sprites.length) {
 			this.reclaimSprite(this.sprites.pop());
 		}
-		
+
 		// let GameInit know we are done (all DisplayObjects are event dispatchers):
 		this.dispatchEvent("end");
 	}
-	
+
 	window.Game = createjs.promote(Game, "EventDispatcher");
 })();

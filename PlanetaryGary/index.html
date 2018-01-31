@@ -6,13 +6,13 @@
 </head>
 <body>
 	<!-- a common parent div lets the game canvas & stats share a coordinate system -->
-	<div id="gameFrame">
+	<!--<div id="gameFrame">--
 		<!-- our game canvas -->
 		<canvas id="gameCanvas" width="800" height="600">
 			alternate content
 		</canvas>
 		<canvas id="uiCanvas" width="800" height="600"></canvas>
-		
+
 		<!-- the "score board" that is layered over the game -->
 		<!-- it will be wrapped in a DOMElement so EaselJS can control it -->
 		<div id="gameStats">
@@ -23,10 +23,10 @@
 				<tr class="score"><td class="label">Total Score:</td><td id="scoreFld">0</td></tr>
 			</table>
 		</div>
-	</div>
-	
+	<!--</div>-->
+
 	<!-- load only the libs we need to init the preload queue & draw the progress bar -->
-	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+	<script src="js/createjs.min.js"></script>
 	<!-- kick things off: -->
 	<script src="js/GameInit.js"></script>
 </body>
