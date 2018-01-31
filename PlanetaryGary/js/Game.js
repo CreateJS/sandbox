@@ -63,6 +63,8 @@
 			bg.graphics
 				.beginLinearGradientFill(["#C1F0C7", "#F0F9D1"], [0,1], 0,0, 0,this.height-170*s)
 				.drawRect(0,0,this.width,this.height-170*s)
+				.beginFill("#eb9c9b").drawRect(0,this.height-300*s,this.width,150*s)
+				.beginFill("#b64444").drawRect(0, this.height-172*this.scale, this.width, 3*this.scale)
 				.beginFill("#f55351").drawRect(0,this.height-170*s,this.width,170*s);
 			bg.cache(0,0,this.width,this.height);
 			this.view.addChild(bg);
@@ -114,8 +116,11 @@
 		bg.graphics.clear()
 			.beginLinearGradientFill(["#C1F0C7", "#F0F9D1"], [0,1], 0,0, 0,this.height-170*this.scale)
 			.drawRect(0,0,this.width,this.height-170*this.scale)
+			.beginFill("#eb9c9b").drawRect(0,this.height-300*this.scale,this.width,150*this.scale)
+			.beginFill("#b64444").drawRect(0, this.height-172*this.scale, this.width, 3*this.scale)
 			.beginFill("#f55351").drawRect(0,this.height-170*this.scale,this.width,170*this.scale);
 		bg.cache(0,0,this.width,this.height);
+		//bg.alpha = 0.5
 
 		//SD:update terrain elements bounds and adjust positions of sprites
 		var l = this.terrain.length;
@@ -216,18 +221,18 @@
 		if (!sprite.trap && this.shot.visible && !sprite.dead && Math.abs(this.shot.x-sprite.x) < 50*this.scale) {
 			// in a more robust game, we'd likely build a simple label matrix instead
 			// of using "hacky" string approaches to assemble the label (ex "enemy0Death")
-			sprite.gotoAndPlay(sprite.currentAnimation.substr(0,6)+"Death");
-			sprite.dead = true;
-			this.shot.visible = false;
-			c.Sound.play("EnemyHit");
-			this.kills++;
+			//sprite.gotoAndPlay(sprite.currentAnimation.substr(0,6)+"Death");
+			//sprite.dead = true;
+			//this.shot.visible = false;
+			//c.Sound.play("EnemyHit");
+			//this.kills++;
 		} else if (!this.dead && sprite.trap && Math.abs(this.hero.x-sprite.x) < 80*this.scale) {
 			if (sprite.tunnel && this.hero.currentAnimation != "slide") {
-				this.die("tunneldeath");
-				c.Sound.play("TunnelCollision");
+				//this.die("tunneldeath");
+				//c.Sound.play("TunnelCollision");
 			} else if (!sprite.tunnel && this.hero.currentAnimation != "jump") {
-				this.die("death");
-				c.Sound.play("HitHard4");
+				//this.die("death");
+				//c.Sound.play("HitHard4");
 			}
 		} else if (!this.dead && !sprite.jumped && sprite.x < this.hero.x-80*this.scale) {
 			this.hazards++;
