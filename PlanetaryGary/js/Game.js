@@ -82,6 +82,7 @@
 
 		// animate in the stats window:
 		this.stats.set({alpha:0, x:200, y:40});
+		this.stats.scale = this.scale;
 		c.Tween.get(this.stats).wait(1000).to({x:40, alpha:1}, 1000, c.Ease.easeOut);
 
 		this.spriteSheet = spriteSheet;
