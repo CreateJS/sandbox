@@ -55,7 +55,6 @@ var urlParams = {};
 		queue.loadManifest([
 				{src:"assets/PlanetaryGary_art.js", id: "art"},
 				{src:"js/Game.js"},
-
 				{src:"sounds.json", type:c.Types.MANIFEST}
 			], true);
 	}
@@ -140,13 +139,11 @@ var urlParams = {};
 
 		// set up our ticker's default FPS:
 		c.Ticker.framerate = fps;
-
+		handleResize();
 		window.addEventListener("resize", handleResize);
 	}
 
 	function handleResize() {
-
-		//console.log(uiStage.canvas.style.visibility)
 		if (uiStage.canvas.style.visibility == "visible") {
 			currentStage.canvas.width = canvasW = window.innerWidth;
 			currentStage.canvas.height = canvasH = window.innerHeight;
@@ -167,9 +164,7 @@ var urlParams = {};
 			gameStage.updateViewport(window.innerWidth, window.innerHeight);
 
 			game.updateResize(window.innerWidth, window.innerHeight);
-
 		}
-
 	}
 
 	function addBGDecorations() {

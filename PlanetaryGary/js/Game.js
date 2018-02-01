@@ -120,7 +120,6 @@
 			.beginFill("#b64444").drawRect(0, this.height-172*this.scale, this.width, 3*this.scale)
 			.beginFill("#f55351").drawRect(0,this.height-170*this.scale,this.width,170*this.scale);
 		bg.cache(0,0,this.width,this.height);
-		//bg.alpha = 0.5
 
 		//SD:update terrain elements bounds and adjust positions of sprites
 		var l = this.terrain.length;
@@ -134,9 +133,21 @@
 			if (values.minY == null) { item.minY = this.height; }
 			var terrainContainer = this.terrainContainers[i];
 			var num =  terrainContainer.numChildren;
+			//SD:loop and adjust y position for each element with each terrain
 			for(var j=0;j<num;j++) {
 				var sprite = terrainContainer.getChildAt(j);
-				sprite.y = item.minY+Math.random()*(item.maxY-item.minY)|0;
+				if (sprite.trap === true && sprite.tunnel === true) {
+					//SD: Special case for tunnel over hand decoration assets
+					sprite.y = item.minY+(sprite.posY)*(item.maxY-item.minY)|0;
+					var front = this.view.getChildByName("trap2f");
+					if (front!=null) { front.y = sprite.y; }
+				}else {
+					sprite.y = item.minY+(sprite.posY)*(item.maxY-item.minY)|0;
+					//SD: Position enemies
+					if (sprite.currentAnimation.indexOf('enemy') != -1) {
+						sprite.y -= 80*this.scale;
+					}
+				}
 			}
 		}
 		this.hero.y = this.height-80*this.scale;
@@ -153,7 +164,7 @@
 			this.speed = Math.min(12, this.speed+0.005*t); // speed up the game
 			this.updateStats();
 		}
-	}
+	};
 
 	p.handleKeyDown = function(evt) {
 		if (this.dead || this.hero.currentAnimation != "run") { return; }
@@ -208,7 +219,10 @@
 			if (!o.labels || o.x > 0) { continue; }
 			var label = o.labels[Math.random()*o.labels.length|0];
 			var sprite = this.getSprite(label, o.speed, o.bounce, i, o.type);
-			sprite.y = o.minY+Math.random()*(o.maxY-o.minY)|0;
+			var ran = Math.random();
+			//SD:Need to track final position;
+			sprite.y = o.minY+ran*(o.maxY-o.minY)|0;
+			sprite.posY =ran;
 			sprite.x = this.width-sprite.getBounds().x+o.x;
 			if (o.type != null) { this.initSprite(sprite, label); }
 			var range = (o.maxX-o.minX) * (o.type ? this.speed/12 : 1);
@@ -221,18 +235,18 @@
 		if (!sprite.trap && this.shot.visible && !sprite.dead && Math.abs(this.shot.x-sprite.x) < 50*this.scale) {
 			// in a more robust game, we'd likely build a simple label matrix instead
 			// of using "hacky" string approaches to assemble the label (ex "enemy0Death")
-			//sprite.gotoAndPlay(sprite.currentAnimation.substr(0,6)+"Death");
-			//sprite.dead = true;
-			//this.shot.visible = false;
-			//c.Sound.play("EnemyHit");
-			//this.kills++;
+			sprite.gotoAndPlay(sprite.currentAnimation.substr(0,6)+"Death");
+			sprite.dead = true;
+			this.shot.visible = false;
+			c.Sound.play("EnemyHit");
+			this.kills++;
 		} else if (!this.dead && sprite.trap && Math.abs(this.hero.x-sprite.x) < 80*this.scale) {
 			if (sprite.tunnel && this.hero.currentAnimation != "slide") {
-				//this.die("tunneldeath");
-				//c.Sound.play("TunnelCollision");
+				this.die("tunneldeath");
+				c.Sound.play("TunnelCollision");
 			} else if (!sprite.tunnel && this.hero.currentAnimation != "jump") {
-				//this.die("death");
-				//c.Sound.play("HitHard4");
+				this.die("death");
+				c.Sound.play("HitHard4");
 			}
 		} else if (!this.dead && !sprite.jumped && sprite.x < this.hero.x-80*this.scale) {
 			this.hazards++;
@@ -246,6 +260,8 @@
 		sprite.trap = (label.charAt(0) == "t");
 		if (sprite.tunnel = (label == "trap2")) {
 			var front = this.getSprite("trap2f", sprite.speed, sprite.bounce);
+			//SD:Adding name to reference element once resize() is call
+			front.name = "trap2f";
 			this.view.addChild(front).set({x:sprite.x, y:sprite.y});
 		}
 		sprite.dead = sprite.jumped = false;
