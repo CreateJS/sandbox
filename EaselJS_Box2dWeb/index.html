@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>CreateJS export from Moose & Beaver Balls</title>
 
-<script src="http://code.createjs.com/createjs-2015.11.26.min.js"></script>
+
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 <script src="libs/Box2dWeb-2.1.a.3.min.js"></script>
 <script src="assets/balls.js"></script>
 
@@ -45,6 +46,7 @@ var canvas, stage, ballDefs, spriteSheet, ballDelay, w, h, ballsToRemove, count,
 var c = createjs;
 
 function init() {
+	var lib = AdobeAn.getComposition('9773661AD0444F38BA91B914333BDCBE').getLibrary();
 	stage = new createjs.Stage("canvas");
 	
 	w = stage.canvas.width;
@@ -57,7 +59,6 @@ function init() {
 	// set up defs:
 	var builder = new c.SpriteSheetBuilder();
 	var mc = new lib.Balls();
-	mc.actionsEnabled = false;
 	mc.circle.visible = false;
 	builder.addMovieClip(mc, null, SCALE);
 	spriteSheet = builder.build();
@@ -125,7 +126,7 @@ function addBall(type, scale) {
 	var sprite = new c.Sprite(spriteSheet);
 	sprite.gotoAndStop(def.frame);
 	sprite.scaleX = sprite.scaleY = scale;
-	if (type == 0) { sprite.addEventListener("mousedown", boom.bind(this)); }
+	if (type === 0) { sprite.addEventListener("mousedown", boom.bind(this)); }
 	stage.addChild(sprite);
 	
 	var ball = {def:def, fixDef:fixDef, bodyDef:bodyDef, body:body, sprite:sprite, radius:radius, type:type};
